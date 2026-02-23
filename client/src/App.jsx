@@ -4,6 +4,9 @@ import { control } from "./store/slice"
 import Signin from "./components/signup-page/signup"
 import Hero from "./components/hero/hero.jsx"
 import Menu from "./components/menulist/menu.jsx"
+import Mobileapp from "./components/mobileapp/mobileapp.jsx"
+import Display from "./components/productdisplay/productdisplay.jsx"
+import Footer from "./components/footer/footer.jsx"
 function App() {
   const loginstatus=useSelector(state=>state.main.login)
   return (
@@ -13,6 +16,10 @@ function App() {
       {loginstatus?<Signin/>:<></>}
       <Hero/>
       <Menu/>
+     
+      <Display/>
+       <Mobileapp/>
+      <Footer/>
     </div>
   )
 
