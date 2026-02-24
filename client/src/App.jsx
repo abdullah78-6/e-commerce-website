@@ -7,19 +7,25 @@ import Menu from "./components/menulist/menu.jsx"
 import Mobileapp from "./components/mobileapp/mobileapp.jsx"
 import Display from "./components/productdisplay/productdisplay.jsx"
 import Footer from "./components/footer/footer.jsx"
-function App() {
+import { Outlet } from "react-router-dom"
+function Inner(){
   const loginstatus=useSelector(state=>state.main.login)
+  return <div>
+  <Navbar/>
+    {loginstatus?<Signin/>:<></>}
+    <Outlet/>
+    <Footer/>
+
+
+  </div>
+}
+function App() {
+  
   return (
     <div>
-      <Navbar/>
+     <Inner/>
       
-      {loginstatus?<Signin/>:<></>}
-      <Hero/>
-      <Menu/>
-     
-      <Display/>
-       <Mobileapp/>
-      <Footer/>
+
     </div>
   )
 
