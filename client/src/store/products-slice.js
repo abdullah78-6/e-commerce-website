@@ -1,9 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit"
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { productlist } from "../assests";
 const productslice=createSlice({
     name:"products",
-    initialState:{productname:"",productimage:"",productprice:"",productid:null,cartdetails:{}},
+    initialState:{productname:"",productimage:"",productprice:"",productid:null,cartdetails:{},totalprice:0},
     reducers:{
         setpname(state,action){
             state.productname=action.payload;
@@ -44,6 +45,19 @@ const productslice=createSlice({
                 toast.error("ITEM REMOVED FROM THE CART ");
             }
 
+        },
+         settotalprice(state){
+            let total=0;
+            for(const item in state.cartdetails){
+                if(state.cartdetails[item]>0){
+                    let iteminfo=productlist.find((product)=>product._id==item);
+                   total=total+iteminfo.price*state.cartdetails[item]; 
+                }
+            }
+            state.totalprice=total;
+            
+           
+            
         }
         
 

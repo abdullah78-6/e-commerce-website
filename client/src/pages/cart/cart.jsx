@@ -12,16 +12,13 @@ function ShoopingCart(){
     const cartdetails=useSelector(state=>state.main2.cartdetails);
     const productid=useSelector(state=>state.main2.productid);
     const finalcategory=useSelector(state=>state.main.category);
+    const totalprice=useSelector(state=>state.main2.totalprice);
     const dispatch=useDispatch();
     const navigate=useNavigate();
-     useEffect(()=>{
-        if(!productid){
-            navigate("/");
+    useEffect(()=>{
+        dispatch(manage.settotalprice());
 
-        }
-        
-
-    },[productid,navigate]);
+    },[cartdetails]);
     return <div>
         <ToastContainer/>
         
@@ -56,11 +53,15 @@ function ShoopingCart(){
         })
 
         )}
-            {/* <div>
+            <div>
                 <div>
                 <h1>PRODUCT PRICE SECTION</h1>
+                <h1> TOTAL PRICE OF All  PRODUCT : ₹ {totalprice}</h1>
+                <h1>DELIVERY FEE :₹ {totalprice==0?0:150}</h1>
+                <h1>FINAL TOTAL PRICE:₹ {totalprice==0?0:totalprice+150}</h1>
                 </div>
-            </div> */}
+            </div>
+            <button className="bg-rose-700 p-2 text-lg rounded-2xl text-gray-900 font-semibold hover:bg-rose-900 " onClick={()=>navigate("/order")}>PROCEED TO CHECKOUT </button>
 
     </div>
 

@@ -11,6 +11,7 @@ import Hero from './components/hero/hero.jsx'
 import Menu from './components/menulist/menu.jsx'
 import Mobileapp from './components/mobileapp/mobileapp.jsx'
 import Details from './pages/productdetails/details.jsx'
+import Placeorder from './pages/placeorder/placeorder.jsx'
 const router=createBrowserRouter([
   {
     path:"/",
@@ -35,6 +36,10 @@ const router=createBrowserRouter([
       {
         path:"/cart",
         element:<ShoopingCart/>
+      },
+      {
+        path:"/order",
+        element:<Placeorder/>
       }
       
 

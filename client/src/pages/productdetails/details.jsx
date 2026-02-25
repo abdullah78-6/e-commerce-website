@@ -14,6 +14,7 @@ function Details(){
     useEffect(()=>{
         if(!productid){
             navigate("/");
+          
 
         }
         
