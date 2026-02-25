@@ -28,7 +28,7 @@ const productslice=createSlice({
             }
             else{
                 state.cartdetails[id]+=1;
-                toast.success("ITEM ADDED TO THE CART ");
+                
             }
 
 
@@ -37,7 +37,7 @@ const productslice=createSlice({
             const id=action.payload;
             if(state.cartdetails[id]>1){
                 state.cartdetails[id]-=1;
-                toast.error("ITEM REMOVED FROM THE  CART ");
+                
             }
             else{
                 delete state.cartdetails[id];

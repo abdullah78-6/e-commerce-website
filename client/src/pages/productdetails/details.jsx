@@ -2,12 +2,23 @@ import {useDispatch,useSelector} from "react-redux"
 import { manage } from "../../store/products-slice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {useNavigate} from "react-router-dom"
+import { useEffect } from "react";
 function Details(){
     const productname=useSelector(state=>state.main2.productname);
     const productimage=useSelector(state=>state.main2.productimage);
     const productprice=useSelector(state=>state.main2.productprice);
     const productid=useSelector(state=>state.main2.productid);
+    const navigate=useNavigate();
     const dispatch=useDispatch();
+    useEffect(()=>{
+        if(!productid){
+            navigate("/");
+
+        }
+        
+
+    },[productid,navigate]);
     return <div className="flex justify-center items-center gap-12">
         <ToastContainer/>
         <div>
