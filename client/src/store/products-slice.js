@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { productlist } from "../assests";
 const productslice=createSlice({
     name:"products",
-    initialState:{productname:"",productimage:"",productprice:"",productid:null,cartdetails:{},totalprice:0},
+    initialState:{productname:"",productimage:"",productprice:"",productid:null,cartdetails:{},totalprice:0,totalquantity:0},
     reducers:{
         setpname(state,action){
             state.productname=action.payload;
@@ -58,7 +58,17 @@ const productslice=createSlice({
             
            
             
+        },
+        settotalquantity(state){
+            let total1=0;
+            for(const item in state.cartdetails){
+                if(state.cartdetails[item]>0){
+                    total1=total1+state.cartdetails[item];
+                }
+            }
+            state.totalquantity=total1;
         }
+
         
 
     }

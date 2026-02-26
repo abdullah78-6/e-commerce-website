@@ -3,10 +3,21 @@ import { control } from "../../store/slice.js";
 import { FaCartShopping } from "react-icons/fa6";
 import { manage } from "../../store/products-slice.js";
 import {Link} from "react-router-dom"
+import { productlist } from "../../assests/index.js";
+import { useEffect } from "react";
+
 function Navbar(){
     const dispatch=useDispatch();
     const finalnavclass=useSelector(state=>state.main.navclass);
     const loginstatus=useSelector(state=>state.main.login);
+    const carttotal=useSelector(state=>state.main2.totalprice);
+    const cartdetails=useSelector(state=>state.main2.cartdetails);
+    const productid=useSelector(state=>state.main2.productid);
+    const totalquantity=useSelector(state=>state.main2.totalquantity);
+    useEffect(()=>{
+        dispatch(manage.settotalquantity());
+
+    },[cartdetails])
     function change(classname){
         dispatch(control.setnavclass(classname));
         console.log(finalnavclass);
@@ -28,8 +39,22 @@ function Navbar(){
             <li onClick={()=>change("products")} className={finalnavclass==="products"?"border-b-4 border-b-pink-600":""}>products</li>
         </ul>
         <div className="flex justify-center items-center gap-6" >
-            <div>
-            <Link to="/cart" className="text-3xl text-pink-900"><FaCartShopping /></Link>
+             
+            <div >
+                    
+            <Link to="/cart" className="text-3xl relative text-pink-900">
+            <h1><FaCartShopping /></h1>
+            {carttotal===0?"":
+            <div className="bg-pink-600 absolute w-6 h-6   bottom-6.5 rounded-4xl left-5">
+             
+                
+                
+                     <h1 className="absolute text-xl text-yellow-300 bottom-0 left-1 top-[-9] ml-0.5 font-semibold  ">{totalquantity}</h1>
+                
+                
+                </div>}
+            </Link>
+
             </div>
             <button onClick={()=>updateloginstatus(true)} className="text-2xl capitalize rounded-4xl border border-pink-600  text-pink-600 p-2 hover:bg-pink-600 hover:text-white">log-in</button>
             
