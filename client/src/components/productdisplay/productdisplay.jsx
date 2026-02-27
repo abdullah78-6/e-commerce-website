@@ -19,7 +19,7 @@ const dispatch=useDispatch();
                         <h1 className="text-2xl text-center">{item.name}</h1>
                         <h1 className="text-lg text-pink-700 mt-4 text-center">₹{item.price}</h1>
                         <div className="flex justify-center items-center " onClick={()=>dispatch(manage.setpprice(item.price))}>
-                        <Link to="/display" onClick={()=>dispatch(manage.setpname(item.name))}   className="text-lg w-50 text-center capitalize bg-pink-500 p-2 rounded-2xl text-white hover:text-gray-600 hover:bg-pink-600 mt-2">details</Link>
+                        <Link to="/display" onClick={()=>dispatch(manage.setpname(item.name),dispatch(manage.setproductdescription(item.description)))}   className="text-lg w-50 text-center capitalize bg-pink-500 p-2 rounded-2xl text-white hover:text-gray-600 hover:bg-pink-600 mt-2">details</Link>
                         </div>
                         </div>
                     

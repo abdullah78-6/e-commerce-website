@@ -9,6 +9,7 @@ function Details(){
     const productimage=useSelector(state=>state.main2.productimage);
     const productprice=useSelector(state=>state.main2.productprice);
     const productid=useSelector(state=>state.main2.productid);
+    const productdescription=useSelector(state=>state.main2.productdescription);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     useEffect(()=>{
@@ -31,9 +32,8 @@ function Details(){
         </div>
         <div>
             <h1>{productname}</h1>
-           <p>Qidwai Collections is your ultimate fashion destination for the entire family. We offer a wide variety of stylish and comfortable clothing for kids, men, women, and babies, covering all types of outfits for both winter and summer seasons. From everyday essentials to trendy seasonal wear, our collections are designed to combine quality, comfort, and affordability. We proudly feature our own branded shirts and t-shirts, elegant women’s sandals, and premium formal coats crafted to elevate your style. At Qidwai Collections, we are committed to bringing you fashion that suits every age, every season, and every occasion.
-
-If you'd like, I can also create a shorter version for your homepage or a more luxury-style brand description.</p>
+            <p>{productdescription}</p>
+           <p>Qidwai Collections is your ultimate fashion destination for the entire family. We offer a wide variety of stylish and comfortable clothing for kids, men, women, and babies, covering all types of outfits for both winter and summer seasons. From everyday essentials to trendy seasonal wear, our collections are designed to combine quality, comfort, and affordability. We proudly feature our own branded shirts and t-shirts, elegant women’s sandals, and premium formal coats crafted to elevate your style. At Qidwai Collections, we are committed to bringing you fashion that suits every age, every season, and every occasion.</p>
         </div>
         
         
