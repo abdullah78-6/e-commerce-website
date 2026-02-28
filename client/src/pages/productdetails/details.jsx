@@ -21,23 +21,51 @@ function Details(){
         
 
     },[productid,navigate]);
-    return <div className="flex justify-center items-center gap-12">
-        <ToastContainer/>
-        <div>
-            <h1>id:{productid}</h1>
-            <img src={productimage} alt={productimage}/>
+    return (
+  <div className="flex justify-center items-center gap-16 flex-wrap font-semibold capitalize min-h-screen  px-6 py-10">
+    <ToastContainer />
 
-        <h1>₹{productprice}</h1>
-        <button onClick={()=>dispatch(manage.setaddtocart(productid))}  className="text-gray-800 bg-pink-700 p-2 rounded-2xl text-xl capitalize hover:bg-pink-900 hover:text-white">add to cart </button>
-        </div>
-        <div>
-            <h1>{productname}</h1>
-            <p>{productdescription}</p>
-           <p>Qidwai Collections is your ultimate fashion destination for the entire family. We offer a wide variety of stylish and comfortable clothing for kids, men, women, and babies, covering all types of outfits for both winter and summer seasons. From everyday essentials to trendy seasonal wear, our collections are designed to combine quality, comfort, and affordability. We proudly feature our own branded shirts and t-shirts, elegant women’s sandals, and premium formal coats crafted to elevate your style. At Qidwai Collections, we are committed to bringing you fashion that suits every age, every season, and every occasion.</p>
-        </div>
-        
-        
+
+    <div className=" p-6 rounded-3xl shadow-lg flex flex-col items-center text-center hover:shadow-xl transition">
+      
+      <img
+        className="w-72 p-3 rounded-3xl shadow-md object-cover"
+        src={productimage}
+        alt={productimage}
+        loading="lazy"
+      />
+
+      <h1 className="text-pink-700 text-xl mt-4">
+        product id: {productid}
+      </h1>
+
+      <h1 className="text-pink-700 text-2xl font-bold mt-2">
+        ₹{productprice}
+      </h1>
+
+      <button
+        onClick={() => dispatch(manage.setaddtocart(productid))}
+        className="text-white bg-pink-700 px-6 py-2 rounded-2xl text-lg capitalize hover:bg-pink-900 transition mt-4 shadow-md hover:shadow-lg"
+      >
+        add to cart
+      </button>
     </div>
 
+
+    <div className="w-90 space-y-4">
+      <h1 className="text-4xl text-pink-700 font-bold">
+        {productname}
+      </h1>
+
+      <p className="text-xl text-gray-800 leading-relaxed">
+        {productdescription}
+      </p>
+
+      <p className="text-lg text-gray-700 leading-relaxed bg-white p-6 rounded-2xl shadow-md">
+        Qidwai Collections is your ultimate fashion destination for the entire family...
+      </p>
+    </div>
+  </div>
+);
 }
 export default Details;

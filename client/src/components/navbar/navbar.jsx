@@ -43,13 +43,13 @@ function Navbar(){
             <div >
                     
             <Link to="/cart" className="text-3xl relative text-pink-900">
-            <h1><FaCartShopping /></h1>
+            <h1 className="mt-3"><FaCartShopping /></h1>
             {carttotal===0?"":
-            <div className="bg-pink-600 absolute w-6 h-6   bottom-6.5 rounded-4xl left-5">
+            <div className="bg-pink-600 absolute w-7 h-7 p-4   bottom-6.5 top-0.7 rounded-4xl left-5">
              
                 
                 
-                     <h1 className="absolute text-xl text-yellow-300 bottom-0 left-1 top-[-9] ml-0.5 font-semibold  ">{totalquantity}</h1>
+                     <h1 className="absolute text-xl text-yellow-300 bottom-0 left-1 top-[-0.5px] ml-1 font-semibold  ">{totalquantity}</h1>
                 
                 
                 </div>}

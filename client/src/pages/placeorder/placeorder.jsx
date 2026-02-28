@@ -2,7 +2,7 @@ import {useDispatch,useSelector} from "react-redux"
 import { manage } from "../../store/products-slice";
 const Placeorder=()=>{
     const totalprice=useSelector(state=>state.main2.totalprice);
-    return <div className="min-h-screen w-full flex justify-center px-4 py-10 bg-white gap-30 items-center flex-wrap ">
+    return <div className="min-h-screen w-full flex justify-center px-4 py-10  gap-30 items-center flex-wrap ">
         <div>
     <form className="flex flex-col gap-6 shadow-2xl rounded-3xl p-12 text-gray-800 font-semibold">
 

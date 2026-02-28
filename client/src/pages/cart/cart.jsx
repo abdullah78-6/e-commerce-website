@@ -19,51 +19,87 @@ function ShoopingCart(){
         dispatch(manage.settotalprice());
 
     },[cartdetails]);
-    return <div>
-        <ToastContainer/>
-        
-        {Object.values(cartdetails).every((qty)=>qty===0)?(
-            <h1>CART IS EMPTY </h1>
-        ):(
-        productlist.map((item)=>{
-            if(cartdetails[item._id]>0){
-                return (
-                    
-                    <div className="flex justify-center items-center gap-20 p-4">
-                        <img src={item.image} alt={item.image}/>
-                        
-                           <div>
-            <h1>INCREASE QUANTITY</h1>
-            <h1><FaPlus onClick={()=>dispatch(manage.setaddtocart(item._id))}/></h1>
-          </div>
-                        
-                    
-                     
-                        <h1>PRODUCT NAME ={item.name}</h1>
-                        <h1> SINGLE PRODUCT PRICE =₹{item.price}</h1>
-                        {/* quantity */}
-                        <p> QUANTITY {cartdetails[item._id]}</p>
-                        {/* total price of product  */}
-                        <p> TOTAL PRICE ₹{item.price*cartdetails[item._id]}</p>
-                        <h1  onClick={()=>dispatch(manage.setremovefromcart(item._id))}>REMOVE PRODUCT <RxCross1/></h1>
-                 </div>
-                )
-            }
+    return (
+  <div className="font-semibold min-h-screen w-full  px-4 md:px-10 py-6">
+    <ToastContainer />
 
-        })
-
-        )}
-            <div>
-                <div>
-                <h1>PRODUCT PRICE SECTION</h1>
-                <h1> TOTAL PRICE OF All  PRODUCT : ₹ {totalprice}</h1>
-                <h1>DELIVERY FEE :₹ {totalprice==0?0:150}</h1>
-                <h1>FINAL TOTAL PRICE:₹ {totalprice==0?0:totalprice+150}</h1>
-                </div>
-            </div>
-            <button className="bg-rose-700 p-2 text-lg rounded-2xl text-gray-900 font-semibold hover:bg-rose-900 " onClick={()=>navigate("/order")}>PROCEED TO CHECKOUT </button>
-
+    {/* Header */}
+    <div className="flex justify-center mt-[-9px] items-center overflow-x-auto">
+      <ul className="flex justify-between mt-[-9px] items-center gap-16 p-4 text-center capitalize text-lg md:text-lg  rounded-2xl  min-w-[900px]">
+        <li className="w-32">product image</li>
+        <li className="w-32">increase quantity</li>
+        <li className="w-32">product name</li>
+        <li className="w-32">single product price</li>
+        <li className="w-24">quantity</li>
+        <li className="w-32">total price</li>
+        <li className="w-24">remove product</li>
+      </ul>
     </div>
 
+    {/* Cart Items */}
+    <div className="mt-14 space-y-4 max-h-[500px] overflow-y-auto pr-2">
+      {Object.values(cartdetails).every((qty) => qty === 0) ? (
+        <h1 className="text-center mt-10 text-3xl text-red-700 font-semibold">
+          CART IS EMPTY
+        </h1>
+      ) : (
+        productlist.map((item) => {
+          if (cartdetails[item._id] > 0) {
+            return (
+              <div
+                key={item._id}
+                className="flex justify-between items-center gap-16  p-4 text-center  rounded-xl shadow-sm hover:shadow-md transition min-w-[900px]"
+              >
+                <img
+                  className="w-24 h-24 object-cover rounded-2xl"
+                  src={item.image}
+                  alt={item.name}
+                />
+
+                <div>
+                  <FaPlus
+                    className="text-green-700 text-2xl cursor-pointer hover:scale-110 transition"
+                    onClick={() =>
+                      dispatch(manage.setaddtocart(item._id))
+                    }
+                  />
+                </div>
+
+                <h1 className="w-32">{item.name}</h1>
+                <h1 className="w-24">₹{item.price}</h1>
+
+                <p className="w-16">{cartdetails[item._id]}</p>
+
+                <p className="w-24 font-semibold">
+                  ₹{item.price * cartdetails[item._id]}
+                </p>
+
+                <h1
+                  onClick={() =>
+                    dispatch(manage.setremovefromcart(item._id))
+                  }
+                  className="text-red-700 text-2xl cursor-pointer hover:scale-110 transition"
+                >
+                  <RxCross1 />
+                </h1>
+              </div>
+            );
+          }
+        })
+      )}
+    </div>
+
+    {/* Price Section */}
+ <div className="">
+     <div className="text-xl font-semibold text-gray-800 mt-10"> 
+        <h1>PRODUCT PRICE SECTION</h1> 
+        <h1> TOTAL PRICE OF All PRODUCT : ₹ {totalprice}</h1> 
+        <h1>DELIVERY FEE :₹ {totalprice==0?0:150}</h1> 
+        <h1>FINAL TOTAL PRICE:₹ {totalprice==0?0:totalprice+150}</h1> 
+        <button className="bg-rose-700 p-2 text-lg rounded-2xl text-gray-900 font-semibold hover:bg-rose-900 " onClick={()=>navigate("/order")}>PROCEED TO CHECKOUT </button> 
+        </div> 
+        </div>   
+  </div>
+);
 }
 export default ShoopingCart;

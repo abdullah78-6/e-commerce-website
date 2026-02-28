@@ -154,7 +154,7 @@ export const productlist = [
     _id: 14,
     name: "Kids Shoes",
     category: "CHILDRENS COLLECTION",
-    image: "/images/kids/shoes.jpg",
+    image: "food_8.png",
     description: "Durable and lightweight shoes for everyday use.",
     price: 1299,
   },
