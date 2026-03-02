@@ -1,12 +1,60 @@
 import {createSlice} from "@reduxjs/toolkit"
+import { admin_assest } from "../assets";
 const adminslice=createSlice({
     name:"admin",
-    initialState:{class:""},
+    initialState:{class:"",data:{
+        name:"",
+        description:"",
+        price:"",
+        category:"MENS COLLECTION"
+
+    },
+    list:[
+        {
+            
+            image:admin_assest.uploads,
+            name:"abdullah",
+            category:"human",
+            price:123
+
+        },
+        {
+            image:admin_assest.uploads,
+            name:"ronaldo",
+            category:"good man ",
+            price:123909
+
+        },
+        {
+            
+            image:admin_assest.uploads,
+            name:"abdullah",
+            category:"human",
+            price:123
+
+        },
+        {
+            
+            image:admin_assest.uploads,
+            name:"abdullah",
+            category:"human",
+            price:123
+
+        },
+    ]
+       },
     reducers:{
         setclass(state,action){
             state.class=action.payload
             
+        },
+        
+        setdata(state,action){
+           const {name,value}=action.payload
+           state.data[name]=value;
+
         }
+        
 
     }
 })
