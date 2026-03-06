@@ -47,11 +47,11 @@ const deleteitem=async(req,res)=>{
         const fproduct=await fashionmodel.findById(req.body.id);
         fs.unlink(`uploads/${fproduct.image}`,()=>{});
         await fashionmodel.findByIdAndDelete(req.body.id);
-        res.json({success:true,result:"DATA DELETED SUCESSFULLY "});
+         res.json({success:true,result:"DATA DELETED SUCESSFULLY "});
         
     } catch (error) {
         console.log("delete error",error);
-        res.json({success:false,result:"DATA DELETE ERROR"});
+         res.json({success:false,result:"DATA DELETE ERROR"});
         
     }
 

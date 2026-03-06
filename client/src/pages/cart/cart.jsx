@@ -13,8 +13,10 @@ function ShoopingCart(){
     const productid=useSelector(state=>state.main2.productid);
     const finalcategory=useSelector(state=>state.main.category);
     const totalprice=useSelector(state=>state.main2.totalprice);
+    const backenddata=useSelector(state=>state.main2.backenddata);
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const url="http://localhost:8000"
     useEffect(()=>{
         dispatch(manage.settotalprice());
 
@@ -43,7 +45,7 @@ function ShoopingCart(){
           CART IS EMPTY
         </h1>
       ) : (
-        productlist.map((item) => {
+        backenddata.map((item) => {
           if (cartdetails[item._id] > 0) {
             return (
               <div
@@ -52,7 +54,7 @@ function ShoopingCart(){
               >
                 <img
                   className="w-24 h-24 object-cover rounded-2xl"
-                  src={item.image}
+                  src={`${url}/images/`+item.image}
                   alt={item.name}
                 />
 

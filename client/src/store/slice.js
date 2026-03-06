@@ -1,7 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit"
 const eslice=createSlice({
     name:"shop",
-    initialState:{navclass:"",login:false,statelog:"signin",input:"text",category:"ALL"},
+    initialState:{navclass:"",login:false,statelog:"signin",input:"text",category:"ALL",logindata:{
+        name:"",
+        email:"",
+        password:""
+    }},
     reducers:{
         setnavclass(state,action){
             state.navclass=action.payload;
@@ -20,6 +24,12 @@ const eslice=createSlice({
         },
         setcategory(state,action){
             state.category=action.payload;
+        },
+        setloginds(state,action){
+            const {name,value}=action.payload;
+            state.logindata[name]=value;
+
+
         }
 
     }

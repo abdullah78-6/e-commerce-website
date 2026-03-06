@@ -2,11 +2,14 @@ import {useDispatch, useSelector} from "react-redux"
 import { control } from "../../store/slice.js";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
+import axios from "axios"
 function Signin(){
     const dispatch=useDispatch();
     const loginboolvalue=useSelector(state=>state.main.login);
     const logintype=useSelector(state=>state.main.statelog);
     const inputtype=useSelector(state=>state.main.input);
+    const logindatastructure=useSelector(state=>state.main.logindata);
+    const url="http://localhost:8000"
     function loginstatuschange(status){
         dispatch(control.setlogin(false));;
     }
@@ -15,11 +18,33 @@ function Signin(){
     }
     function changeinginp(type){
         dispatch(control.setinput(type));
+}
+function Onchangehandler(event){
+    dispatch(control.setloginds({
+        name:event.target.name,
+        value:event.target.value
+    }))
+ 
+
+}
+const onlogin=async(event)=>{
+    event.preventDefault();
+    let newurl=url;
+    if(logintype==="signin"){
+        // set login api url
+        newurl=newurl+"/api/auth/signin"
 
     }
+    else{
+        // set signup api url
+        newurl=newurl+"/api/auth/signup"
+    }
+    const response=await axios.post(newurl,logindatastructure);
+
+}
     return <div className="inset-0 fixed flex flex-col justify-center items-center bg-black/40 backdrop-blur-sm  ">
        
-        <form className="flex flex-col gap-6 shadow-2xl w-[420px] bg-white rounded-3xl  p-7" >
+        <form className="flex flex-col gap-6 shadow-2xl w-[420px] bg-white rounded-3xl  p-7"onSubmit={onlogin} >
              <div className="relative">
             <h1 className="cursor-pointer absolute text-3xl text-red-500 bottom-1 top-4 right-6" onClick={()=>loginstatuschange(false)}>X</h1>
         </div>
@@ -28,7 +53,7 @@ function Signin(){
             <label className="text-lg font-semibold text-pink-900" htmlFor="name">ENTER-NAME</label>
             </div>
             <div>
-            <input className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700"  type="text"placeholder="enter-name"required/>
+            <input name="name" onChange={Onchangehandler} value={logindatastructure.name} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700"  type="text"placeholder="enter-name"required/>
             </div>
             
             
@@ -41,7 +66,7 @@ function Signin(){
             <label className="text-lg font-semibold text-pink-900" htmlFor="email">ENTER-EMAIL</label>
             </div>
             <div>
-            <input className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700" type="text"placeholder="enter-email" required/>
+            <input name="email" onChange={Onchangehandler} value={logindatastructure.email} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700" type="text"placeholder="enter-email" required/>
             </div>
         </div>
         
@@ -51,7 +76,7 @@ function Signin(){
             <label className="text-lg font-semibold text-pink-900" htmlFor="password">ENTER-PASSWORD</label>
             </div>
             <div className="flex gap-3 items-center">
-            <input className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700" type={inputtype}placeholder="enter-password" required/>
+            <input name="password" onChange={Onchangehandler} value={logindatastructure.password} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700" type={inputtype}placeholder="enter-password" required/>
             {inputtype==="text"?<FaRegEye className="text-2xl text-pink-800" onClick={()=>changeinginp("password")}/>:<FaEyeSlash className="text-2xl text-pink-800" onClick={()=>changeinginp("text")}/>}
             </div>
         </div>
@@ -60,7 +85,7 @@ function Signin(){
                 {logintype==="signin"?<input className="" type="checkbox" required/>:<></>}
             </div>
             <div>
-         {logintype==="signup"?<button className="bg-pink-600 hover:bg-pink-900  text-white p-3 rounded-4xl">CREATE AN ACCOUNT</button>:<button className="bg-pink-600 hover:bg-pink-900  text-white p-3 rounded-4xl">SIGN-IN</button>}   
+         {logintype==="signup"?<button type="submit" className="bg-pink-600 hover:bg-pink-900  text-white p-3 rounded-4xl">CREATE AN ACCOUNT</button>:<button type="submit" className="bg-pink-600 hover:bg-pink-900  text-white p-3 rounded-4xl">SIGN-IN</button>}   
          </div>
          <div>
         

@@ -9,6 +9,7 @@ const adminslice=createSlice({
         category:"MENS COLLECTION"
 
     },
+    backenddata:[],
     list:[
         {
             
@@ -53,6 +54,10 @@ const adminslice=createSlice({
            const {name,value}=action.payload
            state.data[name]=value;
 
+        },
+        setbackenddata(state,action){
+            state.backenddata=action.payload;
+            
         }
         
 

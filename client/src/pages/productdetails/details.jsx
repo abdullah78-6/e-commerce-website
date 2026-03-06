@@ -10,8 +10,10 @@ function Details(){
     const productprice=useSelector(state=>state.main2.productprice);
     const productid=useSelector(state=>state.main2.productid);
     const productdescription=useSelector(state=>state.main2.productdescription);
+    const backenddata=useSelector(state=>state.main2.backenddata);
     const navigate=useNavigate();
     const dispatch=useDispatch();
+    const url="http://localhost:8000";
     useEffect(()=>{
         if(!productid){
             navigate("/");
@@ -30,7 +32,7 @@ function Details(){
       
       <img
         className="w-72 p-3 rounded-3xl shadow-md object-cover"
-        src={productimage}
+        src={`${url}/images/`+productimage}
         alt={productimage}
         loading="lazy"
       />

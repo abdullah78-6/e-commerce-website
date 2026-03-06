@@ -3,7 +3,8 @@ import { control } from "../../redux/slice";
 import { admin_assest } from "../../assets";
 import {ToastContainer,toast} from "react-toastify"
 import { useState } from "react";
-function Add(){
+import axios from "axios";
+function Add({url}){
     const[image,setimage]=useState(false);
     const data=useSelector(state=>state.ainfo.data);
     const dispatch=useDispatch();
@@ -12,9 +13,6 @@ function Add(){
             name:event.target.name,
             value:event.target.value
         }));
-        console.log(data);
-
-
     }
     const onsubmithandler=async(event)=>{
         event.preventDefault();
@@ -22,9 +20,27 @@ function Add(){
             toast.error("PLEASE UPLOAD IMAGE ");
             return ;
         }
-         toast.success("form submiteed call api ");
-        console.log("AFTER SUBMISSION YOUR DATA IS ",data);
-        console.log("YOUR IMAGE URL IS ",image );
+        const formdata=new FormData();
+        formdata.append("name",data.name);
+        formdata.append("description",data.description);
+        formdata.append("price",Number(data.price));
+        formdata.append("category",data.category);
+        formdata.append("image",image);
+        const response =await  axios.post(`${url}/api/store/add`,formdata);
+        if(response.data.status){
+            setimage(false);
+            data({
+                name:"",
+                description:"",
+                price:"",
+                category:"MENS COLLECTION"
+            })
+            toast.success(response.data.message);
+        }
+        else{
+            toast.error("SIMETHING WENT WRONG ");
+        }
+       
         
     }
     return <div className="font-semibold text-gray-800 capitalize    ">
