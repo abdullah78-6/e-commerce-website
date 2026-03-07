@@ -5,7 +5,11 @@ const eslice=createSlice({
         name:"",
         email:"",
         password:""
-    }},
+    },
+    profileicon:false,
+    backendemail:"",
+    token:""
+},
     reducers:{
         setnavclass(state,action){
             state.navclass=action.payload;
@@ -30,6 +34,15 @@ const eslice=createSlice({
             state.logindata[name]=value;
 
 
+        },
+        setprofileicon(state,action){
+            state.profileicon=action.payload;
+        },
+        setbackendemail(state,action){
+            state.backendemail=action.payload;
+        },
+        settoken(state,action){
+            state.token=action.payload;
         }
 
     }

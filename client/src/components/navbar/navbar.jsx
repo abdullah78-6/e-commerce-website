@@ -5,6 +5,7 @@ import { manage } from "../../store/products-slice.js";
 import {Link} from "react-router-dom"
 import { productlist } from "../../assests/index.js";
 import { useEffect } from "react";
+import {toast} from "react-toastify"
 
 function Navbar(){
     const dispatch=useDispatch();
@@ -14,6 +15,8 @@ function Navbar(){
     const cartdetails=useSelector(state=>state.main2.cartdetails);
     const productid=useSelector(state=>state.main2.productid);
     const totalquantity=useSelector(state=>state.main2.totalquantity);
+    const profileicon=useSelector(state=>state.main.profileicon);
+    const backendemail=useSelector(state=>state.main.backendemail);
     useEffect(()=>{
         dispatch(manage.settotalquantity());
 
@@ -25,11 +28,22 @@ function Navbar(){
     function updateloginstatus(status){
         dispatch(control.setlogin(status));
     }
+    const logout=(e)=>{
+        if(e==="Logout"){
+            localStorage.removeItem("token");
+            dispatch(control.setbackendemail(""));
+            dispatch(control.setprofileicon(false));
+            dispatch(control.settoken(""));
+            toast.error("USER LOGOUT SUCCESSFULLY");
+        }
+
+    }
     return <div className="flex justify-between items-center  shadow-2xl p-4 cursor-pointer font-semibold">
         <div>
             
-            <h1 className="text-4xl text-gray-800">CLOTHES-<span className="text-pink-600">SHOP</span></h1>
             
+            <h1 className="text-4xl text-gray-800">CLOTHES-<span className="text-pink-600">SHOP</span></h1>
+    
 
         </div>
         <ul className="mt-0 flex  justify-center items-center gap-12 capitalize text-xl cursor-pointer text-gray-800">
@@ -56,7 +70,20 @@ function Navbar(){
             </Link>
 
             </div>
-            <button onClick={()=>updateloginstatus(true)} className="text-2xl capitalize rounded-4xl border border-pink-600  text-pink-600 p-2 hover:bg-pink-600 hover:text-white">log-in</button>
+            <div className="flex justify-center items-cnter">
+                <div>
+         {profileicon?<div className="flex gap-5"  >
+            <h1  className="bg-white p-4 rounded-4xl py-2 text-gray-900  border-2 border-pink-700 text-lg ">{backendemail?backendemail.slice(0,1):""}</h1>
+            <select className="mt-3" onChange={(e)=>logout(e.target.value)}>
+                <option  value="orders">Orders</option>
+                <option  value="Logout">Logout</option>
+            </select>
+
+         </div>
+         
+         :<button onClick={()=>updateloginstatus(true)} className="text-2xl capitalize rounded-4xl border border-pink-600  text-pink-600 p-2 hover:bg-pink-600 hover:text-white">log-in</button>}      
+         </div>
+         </div>
             
         </div>
        

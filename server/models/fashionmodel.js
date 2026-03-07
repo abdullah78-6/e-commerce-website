@@ -6,5 +6,5 @@ const fashionschema=new mongoose.Schema({
     image:{type:String,required:true},
     category:{type:String,required:true}
 })
-const fashionmodel=mongoose.models.fashion||mongoose.model("fashionproducts",fashionschema);
+const fashionmodel=mongoose.model.fashion||mongoose.model("fashionproducts",fashionschema);
 export default fashionmodel

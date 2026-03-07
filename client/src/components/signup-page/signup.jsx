@@ -3,6 +3,7 @@ import { control } from "../../store/slice.js";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import axios from "axios"
+import {toast} from "react-toastify"
 function Signin(){
     const dispatch=useDispatch();
     const loginboolvalue=useSelector(state=>state.main.login);
@@ -33,17 +34,38 @@ const onlogin=async(event)=>{
     if(logintype==="signin"){
         // set login api url
         newurl=newurl+"/api/auth/signin"
+        dispatch(control.setprofileicon(true));
+      
 
     }
     else{
         // set signup api url
         newurl=newurl+"/api/auth/signup"
     }
-    const response=await axios.post(newurl,logindatastructure);
+    try{
+        const response=await axios.post(newurl,logindatastructure);
+    if(response.data.status){
+          
+        dispatch(control.settoken(response.data.token));
+        dispatch(control.setbackendemail(response.data.email));
+        localStorage.setItem("token",response.data.token);
+        toast.success(response.data.result);
+        
+    }
+    else{
+        toast.error(response.data.result);
+    }
+
+    }
+    catch(err){
+        toast.error("SERVER ERROR");
+
+    }
+    
 
 }
     return <div className="inset-0 fixed flex flex-col justify-center items-center bg-black/40 backdrop-blur-sm  ">
-       
+    
         <form className="flex flex-col gap-6 shadow-2xl w-[420px] bg-white rounded-3xl  p-7"onSubmit={onlogin} >
              <div className="relative">
             <h1 className="cursor-pointer absolute text-3xl text-red-500 bottom-1 top-4 right-6" onClick={()=>loginstatuschange(false)}>X</h1>
