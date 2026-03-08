@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react";
+import axios from "axios";
 function Details(){
     const productname=useSelector(state=>state.main2.productname);
     const productimage=useSelector(state=>state.main2.productimage);
@@ -11,6 +12,7 @@ function Details(){
     const productid=useSelector(state=>state.main2.productid);
     const productdescription=useSelector(state=>state.main2.productdescription);
     const backenddata=useSelector(state=>state.main2.backenddata);
+    const token=useSelector(state=>state.main.token);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const url="http://localhost:8000";
@@ -23,6 +25,16 @@ function Details(){
         
 
     },[productid,navigate]);
+    const Addtocart=async()=>{
+      dispatch(manage.setaddtocart(productid));
+      let itemid=productid;
+      if(token){
+        await axios.post(url+"/api/cart/inc",{itemid},{headers:{token}});
+        
+      }
+
+
+    }
     return (
   <div className="flex justify-center items-center gap-16 flex-wrap font-semibold capitalize min-h-screen  px-6 py-10">
     <ToastContainer />
@@ -46,7 +58,7 @@ function Details(){
       </h1>
 
       <button
-        onClick={() => dispatch(manage.setaddtocart(productid))}
+        onClick={Addtocart}
         className="text-white bg-pink-700 px-6 py-2 rounded-2xl text-lg capitalize hover:bg-pink-900 transition mt-4 shadow-md hover:shadow-lg"
       >
         add to cart

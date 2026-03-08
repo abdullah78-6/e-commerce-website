@@ -8,12 +8,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react";
+import axios from "axios";
 function ShoopingCart(){
     const cartdetails=useSelector(state=>state.main2.cartdetails);
     const productid=useSelector(state=>state.main2.productid);
     const finalcategory=useSelector(state=>state.main.category);
     const totalprice=useSelector(state=>state.main2.totalprice);
     const backenddata=useSelector(state=>state.main2.backenddata);
+    const token=useSelector(state=>state.main.token);
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const url="http://localhost:8000"
@@ -21,6 +23,21 @@ function ShoopingCart(){
         dispatch(manage.settotalprice());
 
     },[cartdetails]);
+    const Addtocart=async(itemid)=>{
+      dispatch(manage.setaddtocart(itemid));
+      if(token){
+        await axios.post(url+"/api/cart/inc",{itemid},{headers:{token}});
+
+      }
+
+    }
+    const Removefromcart=async(itemid)=>{
+      dispatch(manage.setremovefromcart(itemid))
+      if(token){
+        await axios.post(url+"/api/cart/dec",{itemid},{headers:{token}});
+      }
+
+    }
     return (
   <div className="font-semibold min-h-screen w-full  px-4 md:px-10 py-6">
     <ToastContainer />
@@ -61,9 +78,11 @@ function ShoopingCart(){
                 <div>
                   <FaPlus
                     className="text-green-700 text-2xl cursor-pointer hover:scale-110 transition"
-                    onClick={() =>
-                      dispatch(manage.setaddtocart(item._id))
-                    }
+                    // onClick={() =>
+                    //   dispatch(manage.setaddtocart(item._id))
+                     
+                    // }
+                    onClick={()=>Addtocart(item._id)}
                   />
                 </div>
 
@@ -77,9 +96,10 @@ function ShoopingCart(){
                 </p>
 
                 <h1
-                  onClick={() =>
-                    dispatch(manage.setremovefromcart(item._id))
-                  }
+                  // onClick={() =>
+                  //   dispatch(manage.setremovefromcart(item._id))
+                  // }
+                  onClick={()=>Removefromcart(item._id)}
                   className="text-red-700 text-2xl cursor-pointer hover:scale-110 transition"
                 >
                   <RxCross1 />
