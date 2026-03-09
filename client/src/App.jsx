@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Inner(){
   const loginstatus=useSelector(state=>state.main.login)
   return <div>
-    <ToastContainer  autoClose={3000}/>
+    {/* <ToastContainer  autoClose={3000}/> */}
   <Navbar/>
     {loginstatus?<Signin/>:<></>}
     <Outlet/>

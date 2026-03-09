@@ -10,6 +10,7 @@ import {toast} from "react-toastify"
 function Navbar(){
     const dispatch=useDispatch();
     const finalnavclass=useSelector(state=>state.main.navclass);
+    const token=useSelector(state=>state.main.token);
     const loginstatus=useSelector(state=>state.main.login);
     const carttotal=useSelector(state=>state.main2.totalprice);
     const cartdetails=useSelector(state=>state.main2.cartdetails);
@@ -21,6 +22,17 @@ function Navbar(){
         dispatch(manage.settotalquantity());
 
     },[cartdetails])
+    useEffect(()=>{
+        const load=(e)=>{
+           
+            
+            const tok=localStorage.getItem("token");
+            const eml=localStorage.getItem("email");
+             dispatch(control.settoken(tok));
+            dispatch(control.setbackendemail(eml));
+                 }
+     load();
+},[token,backendemail]);
     function change(classname){
         dispatch(control.setnavclass(classname));
         console.log(finalnavclass);
@@ -31,6 +43,7 @@ function Navbar(){
     const logout=(e)=>{
         if(e==="Logout"){
             localStorage.removeItem("token");
+            localStorage.removeItem("email");
             dispatch(control.setbackendemail(""));
             dispatch(control.setprofileicon(false));
             dispatch(control.settoken(""));
@@ -72,7 +85,7 @@ function Navbar(){
             </div>
             <div className="flex justify-center items-cnter">
                 <div>
-         {profileicon?<div className="flex gap-5"  >
+         {token?<div className="flex gap-5"  >
             <h1  className="bg-white p-4 rounded-4xl py-2 text-gray-900  border-2 border-pink-700 text-lg ">{backendemail?backendemail.slice(0,1):""}</h1>
             <select className="mt-3" onChange={(e)=>logout(e.target.value)}>
                 <option  value="orders">Orders</option>

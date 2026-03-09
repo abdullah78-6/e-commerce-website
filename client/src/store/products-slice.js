@@ -51,7 +51,9 @@ const productslice=createSlice({
             for(const item in state.cartdetails){
                 if(state.cartdetails[item]>0){
                     let iteminfo=state.backenddata.find((product)=>product._id==item);
+                    if(iteminfo){
                    total=total+iteminfo.price*state.cartdetails[item]; 
+                }
                 }
             }
             state.totalprice=total;
@@ -73,6 +75,9 @@ const productslice=createSlice({
         },
         setbackenddata(state,action){
             state.backenddata=action.payload;
+        },
+        setcartitems(state,action){
+            state.cartdetails=action.payload;
         }
 
         

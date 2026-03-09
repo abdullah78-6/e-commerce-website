@@ -12,6 +12,8 @@ import Menu from './components/menulist/menu.jsx'
 import Mobileapp from './components/mobileapp/mobileapp.jsx'
 import Details from './pages/productdetails/details.jsx'
 import Placeorder from './pages/placeorder/placeorder.jsx'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const router=createBrowserRouter([
   {
     path:"/",
@@ -51,7 +53,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={estore}>
     <RouterProvider router={router}>
+      
     </RouterProvider>
+    <ToastContainer  autoClose={3000} pauseOnHover style={{zIndex:9999}}/>
     </Provider>
     
     

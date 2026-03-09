@@ -19,13 +19,31 @@ function ShoopingCart(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const url="http://localhost:8000"
+    const loadcartdata=async(tok)=>{
+      const response=await axios.post(url+"/api/cart/get",{},{headers:{token:tok}});
+      dispatch(manage.setcartitems(response.data.cartdata||{}));
+    }
+    useEffect(()=>{
+      async function Loaddata(){
+        if(localStorage.getItem("token")){
+          const tok=localStorage.getItem("token");
+          if(tok){
+          await loadcartdata(tok);
+          }
+        }
+
+      }
+      Loaddata();
+      
+    },[]);
     useEffect(()=>{
         dispatch(manage.settotalprice());
 
-    },[cartdetails]);
+    },[cartdetails,backenddata]);
+
     const Addtocart=async(itemid)=>{
       dispatch(manage.setaddtocart(itemid));
-      if(token){
+      if(localStorage.getItem("token")){
         await axios.post(url+"/api/cart/inc",{itemid},{headers:{token}});
 
       }
@@ -33,14 +51,14 @@ function ShoopingCart(){
     }
     const Removefromcart=async(itemid)=>{
       dispatch(manage.setremovefromcart(itemid))
-      if(token){
+      if(localStorage.getItem("token")){
         await axios.post(url+"/api/cart/dec",{itemid},{headers:{token}});
       }
 
     }
     return (
   <div className="font-semibold min-h-screen w-full  px-4 md:px-10 py-6">
-    <ToastContainer />
+    {/* <ToastContainer /> */}
 
     {/* Header */}
     <div className="flex justify-center mt-[-9px] items-center overflow-x-auto">
@@ -57,11 +75,12 @@ function ShoopingCart(){
 
     {/* Cart Items */}
     <div className="mt-14 space-y-4 max-h-[500px] overflow-y-auto pr-2">
-      {Object.values(cartdetails).every((qty) => qty === 0) ? (
+      {Object.keys(cartdetails).length===0 ? (
         <h1 className="text-center mt-10 text-3xl text-red-700 font-semibold">
           CART IS EMPTY
         </h1>
       ) : (
+        backenddata.length>0&&
         backenddata.map((item) => {
           if (cartdetails[item._id] > 0) {
             return (

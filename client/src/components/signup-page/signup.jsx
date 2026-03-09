@@ -35,6 +35,7 @@ const onlogin=async(event)=>{
         // set login api url
         newurl=newurl+"/api/auth/signin"
         dispatch(control.setprofileicon(true));
+        
       
 
     }
@@ -45,10 +46,14 @@ const onlogin=async(event)=>{
     try{
         const response=await axios.post(newurl,logindatastructure);
     if(response.data.status){
-          
-        dispatch(control.settoken(response.data.token));
+          if(logintype==="signin"){
+            // dispatch(control.settoken(response.data.token));
+            localStorage.setItem("token",response.data.token);
+            localStorage.setItem("email",response.data.email);
+          }
+        
         dispatch(control.setbackendemail(response.data.email));
-        localStorage.setItem("token",response.data.token);
+        
         toast.success(response.data.result);
         
     }

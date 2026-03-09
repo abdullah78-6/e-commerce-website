@@ -26,9 +26,14 @@ function Details(){
 
     },[productid,navigate]);
     const Addtocart=async()=>{
+      if(!localStorage.getItem("token")){
+        toast.error("PLEASE CREATE AN ACCOUNT ");
+        return ;
+      }
       dispatch(manage.setaddtocart(productid));
       let itemid=productid;
-      if(token){
+      
+      if(localStorage.getItem("token")){
         await axios.post(url+"/api/cart/inc",{itemid},{headers:{token}});
         
       }
@@ -37,7 +42,7 @@ function Details(){
     }
     return (
   <div className="flex justify-center items-center gap-16 flex-wrap font-semibold capitalize min-h-screen  px-6 py-10">
-    <ToastContainer />
+    {/* <ToastContainer /> */}
 
 
     <div className=" p-6 rounded-3xl shadow-lg flex flex-col items-center text-center hover:shadow-xl transition">
@@ -49,9 +54,9 @@ function Details(){
         loading="lazy"
       />
 
-      <h1 className="text-pink-700 text-xl mt-4">
+      {/* <h1 className="text-pink-700 text-xl mt-4">
         product id: {productid}
-      </h1>
+      </h1> */}
 
       <h1 className="text-pink-700 text-2xl font-bold mt-2">
         ₹{productprice}
