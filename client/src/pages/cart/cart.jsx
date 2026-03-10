@@ -19,12 +19,30 @@ function ShoopingCart(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const url="http://localhost:8000"
-    const loadcartdata=async(tok)=>{
+    const fetchproductdata=async()=>{
+      const newurl=url;
+      const response=await axios.get(`${newurl}/api/store/get`); 
+    
+      if(response.data.status){
+        dispatch(manage.setbackenddata(response.data.ans));
+        console.log(response.data.ans);
+        
+
+      }
+      else{
+        console.log("error");
+
+      }
+
+    }
+  const loadcartdata=async(tok)=>{
       const response=await axios.post(url+"/api/cart/get",{},{headers:{token:tok}});
       dispatch(manage.setcartitems(response.data.cartdata||{}));
     }
+   
     useEffect(()=>{
       async function Loaddata(){
+        await  fetchproductdata();
         if(localStorage.getItem("token")){
           const tok=localStorage.getItem("token");
           if(tok){
@@ -38,6 +56,7 @@ function ShoopingCart(){
     },[]);
     useEffect(()=>{
         dispatch(manage.settotalprice());
+       
 
     },[cartdetails,backenddata]);
 
@@ -56,11 +75,12 @@ function ShoopingCart(){
       }
 
     }
+    
     return (
   <div className="font-semibold min-h-screen w-full  px-4 md:px-10 py-6">
     {/* <ToastContainer /> */}
 
-    {/* Header */}
+    
     <div className="flex justify-center mt-[-9px] items-center overflow-x-auto">
       <ul className="flex justify-between mt-[-9px] items-center gap-16 p-4 text-center capitalize text-lg md:text-lg  rounded-2xl  min-w-[900px]">
         <li className="w-32">product image</li>
@@ -73,8 +93,8 @@ function ShoopingCart(){
       </ul>
     </div>
 
-    {/* Cart Items */}
-    <div className="mt-14 space-y-4 max-h-[500px] overflow-y-auto pr-2">
+    
+    <div className="mt-14 space-y-4 max-h-[500px] overflow-y-auto pr-2 cursor-pointer">
       {Object.keys(cartdetails).length===0 ? (
         <h1 className="text-center mt-10 text-3xl text-red-700 font-semibold">
           CART IS EMPTY
@@ -96,7 +116,7 @@ function ShoopingCart(){
 
                 <div>
                   <FaPlus
-                    className="text-green-700 text-2xl cursor-pointer hover:scale-110 transition"
+                    className="text-green-700 text-3xl cursor-pointer hover:scale-110 transition"
                     // onClick={() =>
                     //   dispatch(manage.setaddtocart(item._id))
                      
@@ -119,7 +139,7 @@ function ShoopingCart(){
                   //   dispatch(manage.setremovefromcart(item._id))
                   // }
                   onClick={()=>Removefromcart(item._id)}
-                  className="text-red-700 text-2xl cursor-pointer hover:scale-110 transition"
+                  className="text-red-700 text-3xl cursor-pointer hover:scale-110 transition"
                 >
                   <RxCross1 />
                 </h1>
@@ -130,7 +150,7 @@ function ShoopingCart(){
       )}
     </div>
 
-    {/* Price Section */}
+    
  <div className="">
      <div className="text-xl font-semibold text-gray-800 mt-10"> 
         <h1>PRODUCT PRICE SECTION</h1> 

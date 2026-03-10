@@ -55,15 +55,15 @@ function Navbar(){
         <div>
             
             
-            <h1 className="text-4xl text-gray-800">CLOTHES-<span className="text-pink-600">SHOP</span></h1>
+            <Link to="/" className="text-4xl text-gray-800">CLOTHES-<span className="text-pink-600">SHOP</span></Link>
     
 
         </div>
         <ul className="mt-0 flex  justify-center items-center gap-12 capitalize text-xl cursor-pointer text-gray-800">
-            <li onClick={()=>change("home")} className={finalnavclass==="home"?"border-b-4 border-b-pink-600":""}>home</li>
-            <li onClick={()=>change("contact-us")} className={finalnavclass==="contact-us"?"border-b-4 border-b-pink-600":""}>contact-us</li>
-            <li onClick={()=>change("mobile-app")} className={finalnavclass==="mobile-app"?"border-b-4 border-b-pink-600":""}>mobile-app</li>
-            <li onClick={()=>change("products")} className={finalnavclass==="products"?"border-b-4 border-b-pink-600":""}>products</li>
+            <Link to="/" onClick={()=>change("home")} className={finalnavclass==="home"?"border-b-4 border-b-pink-600":""}>home</Link>
+            <a href="#f" onClick={()=>change("contact-us")} className={finalnavclass==="contact-us"?"border-b-4 border-b-pink-600":""}>contact-us</a>
+            <a href="#m" onClick={()=>change("mobile-app")} className={finalnavclass==="mobile-app"?"border-b-4 border-b-pink-600":""}>mobile-app</a>
+            <a href="#p" onClick={()=>change("products")} className={finalnavclass==="products"?"border-b-4 border-b-pink-600":""}>products</a>
         </ul>
         <div className="flex justify-center items-center gap-6" >
              

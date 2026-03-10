@@ -4,7 +4,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { productlist } from "../assests";
 const productslice=createSlice({
     name:"products",
-    initialState:{productname:"",productimage:"",productprice:"",productid:null,cartdetails:{},totalprice:0,totalquantity:0,productdescription:"",backenddata:[]},
+    initialState:{productname:"",productimage:"",productprice:"",productid:null,cartdetails:{},totalprice:0,totalquantity:0,productdescription:"",backenddata:[],
+    orderdata:{
+        name:"",
+        email:"",
+        address:"",
+        city:"",
+        pincode:"",
+        phonenumber:"",
+        landmark:""
+
+    }
+},
     reducers:{
         setpname(state,action){
             state.productname=action.payload;
@@ -78,6 +89,10 @@ const productslice=createSlice({
         },
         setcartitems(state,action){
             state.cartdetails=action.payload;
+        },
+        setorderdata(state,action){
+            const {name,value}=action.payload;
+            state.orderdata[name]=value;
         }
 
         

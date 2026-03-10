@@ -32,7 +32,7 @@ const url="http://localhost:8000";
 
     },[])
     return <div className="">
-        <div className="flex justify-center-safe items-center flex-wrap gap-7 mt-10 transition ease-in-out duration-200 ">
+        <div className="flex justify-center-safe items-center flex-wrap gap-7 mt-10 transition ease-in-out duration-200 " id="p">
            
             {backenddata.map((item,index)=>{
                 if(finalcategory==="ALL"||finalcategory===item.category){
