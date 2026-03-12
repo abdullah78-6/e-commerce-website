@@ -2,9 +2,13 @@ import {useDispatch,useSelector} from "react-redux"
 import { manage } from "../../store/products-slice";
 import axios from "axios";
 import {toast} from "react-toastify";
+import { useEffect } from "react";
 const Placeorder=()=>{
     const totalprice=useSelector(state=>state.main2.totalprice);
     const orderdata=useSelector(state=>state.main2.orderdata);
+    const backenddata=useSelector(state=>state.main2.backenddata);
+    const cartdetails=useSelector(state=>state.main2.cartdetails);
+    const token=localStorage.getItem("token");
     const dispatch=useDispatch();
     const url="http://localhost:8000";
     const onchangehandler=(event)=>{
@@ -16,18 +20,45 @@ const Placeorder=()=>{
   }
     const Bookorder=async(event)=>{
       event.preventDefault();
-     try {
-      const response=await axios.post(url+"/api/order/det",orderdata);
-      if(response){
-        toast("DUMMY ORDER IS PLACED");
+      let orderitems=[];
+      backenddata.map((item)=>{
+        if(cartdetails[item._id]){
+          orderitems.push({
+            _id:item._id,
+            name:item.name,
+            price:item.price,
+            image:item.image,
+            quantity:cartdetails[item._id]
+          })
+        }
+      })
+      let orderdata2={
+        address:orderdata,
+        items:orderitems,
+        amount:totalprice+150
       }
-      
-     } catch (error) {
-      console.log("error is ",error);
-      
-     }
+      let response=await axios.post(url+"/api/order/det",orderdata2,{headers:{token}});
+      if(response.data.success){
+        const {sessionurl}=response.data;
+        // window.location.replace(sessionurl);
+        window.location.href=sessionurl;
+      }
+      else{
+        toast.error("ERROR OCCUR ");
+      }
+     
+ }
+    useEffect(()=>{
+      if(!token){
+        toast.error("PLEASE CREATE AN ACCOUNT",{toastId:"login"});
+        return ;
+      }
+      else if(totalprice===0){
+        toast.error("NOTHING IS PRESENT IN CART ",{toastId:"cart"});
+        return ;
+      }
 
-    }
+    },[token]);
     return <div className="min-h-screen w-full flex justify-center px-4 py-10  gap-30 items-center flex-wrap ">
         <div>
     <form className="flex flex-col gap-6 shadow-2xl rounded-3xl p-12 text-gray-800 font-semibold" onSubmit={Bookorder}>

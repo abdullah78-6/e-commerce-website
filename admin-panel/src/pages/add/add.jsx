@@ -44,7 +44,7 @@ function Add({url}){
         
     }
     return <div className="font-semibold text-gray-800 capitalize    ">
-        <ToastContainer/>
+        {/* <ToastContainer/> */}
         <form className="flex flex-col justify-center items-center  shadow-2xl bg-white py-1 mt-2 rounded-2xl  w-140 " onSubmit={onsubmithandler}>
             <p className="text-2xl">upload area</p>
             <div>

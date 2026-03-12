@@ -18,7 +18,7 @@ databaseconnection();
 app.get("/",(req,res)=>{
     res.send("API IS READY FOR WORKING ")
 })
-const ports=process.env.port
+const ports=process.env.PORT;
 app.listen(ports,()=>{
     console.log(`SERVER IS LISTINING AT PORT http://localhost:${ports} `)
 })

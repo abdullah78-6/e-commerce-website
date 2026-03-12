@@ -49,7 +49,7 @@ function List({url}){
 return (
     <div className="font-semibold capitalize flex flex-col items-center">
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <h1 className="text-2xl mb-4">all product list</h1>
 

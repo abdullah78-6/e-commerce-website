@@ -8,12 +8,12 @@ function Orders(){
 return (
     <div className="font-semibold capitalize flex flex-col items-center">
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <h1 className="text-2xl mb-4">MY ORDERS </h1>
 
       
-      <div className="border-2 w-150 ml-3">
+      <div className="border-2 w-270 ml-3">
 
       
         <div className="flex text-center py-3 ">
@@ -21,7 +21,10 @@ return (
           <div className="w-1/5">name</div>
           <div className="w-1/5">quantity</div>
           <div className="w-1/5">category</div>
-          <div className="w-1/5">actions</div>
+          <div className="w-1/5">order status</div>
+          <div className="w-1/5">pincode</div>
+          <div className="w-1/5">address</div>
+          <div className="w-1/5">phone</div>
         </div>
 
       
@@ -42,9 +45,17 @@ return (
             <div className="w-1/5">{5}</div>
             <div className="w-1/5">{i.category}</div>
 
+
             <div className="w-1/5">
-              <button className="text-xl text-red-800">X</button>
+              <select>
+                <option value="processing">processing</option>
+                <option value="on the way ">on the way </option>
+                <option value="delivered">delivered</option>
+              </select>
             </div>
+            <div className="w-1/5">226020</div>
+            <div className="w-1/5">daliganj lucknow</div>
+            <div className="w-1/5">995633735</div>
           </div>
         ))}
 

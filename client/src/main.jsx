@@ -14,6 +14,7 @@ import Details from './pages/productdetails/details.jsx'
 import Placeorder from './pages/placeorder/placeorder.jsx'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Order from './pages/orders/order.jsx'
 const router=createBrowserRouter([
   {
     path:"/",
@@ -42,6 +43,10 @@ const router=createBrowserRouter([
       {
         path:"/order",
         element:<Placeorder/>
+      },
+      {
+        path:"/orders",
+        element:<Order/>
       }
       
 

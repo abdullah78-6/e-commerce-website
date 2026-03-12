@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { control } from "../../store/slice.js";
 import { FaCartShopping } from "react-icons/fa6";
 import { manage } from "../../store/products-slice.js";
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { productlist } from "../../assests/index.js";
 import { useEffect } from "react";
 import {toast} from "react-toastify"
@@ -18,6 +18,7 @@ function Navbar(){
     const totalquantity=useSelector(state=>state.main2.totalquantity);
     const profileicon=useSelector(state=>state.main.profileicon);
     const backendemail=useSelector(state=>state.main.backendemail);
+    const navigate=useNavigate();
     useEffect(()=>{
         dispatch(manage.settotalquantity());
 
@@ -40,17 +41,19 @@ function Navbar(){
     function updateloginstatus(status){
         dispatch(control.setlogin(status));
     }
-    const logout=(e)=>{
-        if(e==="Logout"){
+    const logout=()=>{
+        
             localStorage.removeItem("token");
             localStorage.removeItem("email");
             dispatch(control.setbackendemail(""));
             dispatch(control.setprofileicon(false));
             dispatch(control.settoken(""));
             toast.error("USER LOGOUT SUCCESSFULLY");
-        }
+        
+        
 
     }
+
     return <div className="flex justify-between items-center  shadow-2xl p-4 cursor-pointer font-semibold">
         <div>
             
@@ -83,14 +86,17 @@ function Navbar(){
             </Link>
 
             </div>
+            <div>
+                {token?<Link to="/orders" className="text-pink-700 hover:underline"> My Orders</Link>:<></>}
+            </div>
             <div className="flex justify-center items-cnter">
                 <div>
          {token?<div className="flex gap-5"  >
             <h1  className="bg-white p-4 rounded-4xl py-2 text-gray-900  border-2 border-pink-700 text-lg ">{backendemail?backendemail.slice(0,1):""}</h1>
-            <select className="mt-3" onChange={(e)=>logout(e.target.value)}>
-                <option  value="orders">Orders</option>
-                <option  value="Logout">Logout</option>
-            </select>
+            {/* <select className="mt-3" onChange={(e)=>logout(e.target.value)}>
+            <option  value="Logout">Logout</option>
+            </select> */}
+            <button onClick={logout} className="text-xl capitalize bg-red-700 p-3 rounded-4xl text-gray-800 hover:bg-red-900">logout </button>
 
          </div>
          

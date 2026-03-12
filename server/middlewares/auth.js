@@ -10,6 +10,7 @@ const authmiddleware=async(req,res,next)=>{
             req.body={};
         }
         req.body.userid=tokendecode.id;
+        // req.userid=tokendecode.id; gate  
         next();
         
     } catch (error) {
