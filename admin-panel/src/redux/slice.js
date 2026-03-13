@@ -9,7 +9,8 @@ const adminslice=createSlice({
         category:"MENS COLLECTION"
 
     },
-    backenddata:[],
+   backenddata:[],
+    orders:[],
     list:[
         {
             
@@ -58,7 +59,11 @@ const adminslice=createSlice({
         setbackenddata(state,action){
             state.backenddata=action.payload;
             
-        }
+        },
+        setorders(state,action){
+            state.orders=action.payload;
+        },
+       
         
 
     }

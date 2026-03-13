@@ -1,48 +1,65 @@
 import { IoBag } from "react-icons/io5";
-
+import axios from "axios"
+import {useDispatch,useSelector} from "react-redux"
+import { useEffect } from "react";
+import { manage } from "../../store/products-slice";
+import { useState } from "react";
 function Order() {
-  const orders = [
-    {
-      name: "T SHIRT",
-      category: "MENS COLLECTIONS",
-      address: "daliganj lucknow",
-      pincode: 226020,
-      phone: 9956337354,
-      status: "processing",
-      city: "lucknow",
-      landmark: "al noor sweets",
-    },
-    {
-      name: "BOOTS",
-      category: "KIDS COLLECTIONS",
-      address: "DELHI",
-      pincode: 226026,
-      phone: 9415546150,
-      status: "out of delivery",
-      city: "delhi",
-      landmark: "jama masjid",
-    },
-    ,
-    {
-      name: "BOOTS",
-      category: "KIDS COLLECTIONS",
-      address: "DELHI",
-      pincode: 226026,
-      phone: 9415546150,
-      status: "out of delivery",
-      city: "delhi",
-      landmark: "jama masjid",
+  const dispatch=useDispatch();
+  const ordersfrombackend=useSelector(state=>state.main2.orders);
+const token=useSelector(state=>state.main.token);
+const[selectedorder,setselectedorder]=useState(null);
+  const url="http://localhost:8000"
+  const getorders=async()=>{
+    if(!token){
+      return ;
     }
+    const newurl=url;
+    try {
+      const response=await axios.post(`${newurl}/api/order/uorder`,{},{headers:{token}});
+      if(response.data.status){
 
-  ];
+      dispatch(manage.setorders(response.data.result));
+      
+    }
+      else{
+        toast.error("SERVER ISSUE");
+      }
+  } catch (error) {
+    console.log("client side orders error",error);
+  }
+    }
+  useEffect(()=>{
+  if(token){
+      getorders();
+      }
+},[token]);
+const getorderafterupdatestatus=(orderid)=>{
+    //  const response=await axios.post(url+"/api/order/update",{orderid})
+    //   if(response.data.status){
+    // // dispatch(manage.setorders(response.data.ans));
+    // await getorders();
+         
+    //   }
+    //   else{
+    //     toast.error(response.data.message);
+    //   }
+    if(!orderid){
+      return;
+    }
+    setselectedorder(orderid.toString());
+        
+}
+      
 
-  return (
+
+return (
     <div className="h-screen font-semibold capitalize flex flex-col items-center mt-10 px-4">
 
       <h1 className="text-3xl mb-6 text-pink-800">My Orders</h1>
 
     
-      <div className="w-full max-w-7xl overflow-x-auto border rounded-lg">
+      {/* <div className="w-full max-w-7xl overflow-x-auto border rounded-lg">
 
     
         <div className="flex text-center py-3 min-w-[1100px] bg-gray-100 font-bold">
@@ -56,7 +73,7 @@ function Order() {
           <div className="w-32">Status</div>
           <div className="w-32">City</div>
           <div className="w-40">Landmark</div>
-          <div className="w-24">Cancel</div>
+          <div className="w-24">track order</div>
         </div>
 
     
@@ -78,14 +95,39 @@ function Order() {
             <div className="w-32 text-yellow-600">{i.status}</div>
             <div className="w-32">{i.city}</div>
             <div className="w-40">{i.landmark}</div>
-
-            <div className="w-24 text-red-600 text-xl cursor-pointer hover:scale-110">
-              X
-            </div>
+            <button className="bg-black w-24 text-sm  text-gray-200 px-3 rounded-2xl hover:scale-110 transition ease-in-out duration-300">TRACK ORDER </button>
           </div>
         ))}
+      </div> */}
+      <div >
+      {ordersfrombackend&&ordersfrombackend.map((order,index)=>{
+        return (
+          <div key={order._id}>
+            <h1><IoBag /></h1>
+            <p>{order.items.map((item,index)=>{
+              if(index===order.items.length-1){
+                return item.name+ "QUANTITY:" + item.quantity
+              }
+              else{
+                return item.name+ "QUANTITY:" + item.quantity+","
+              }
+            })}</p>
+            <p>MRP:₹{order.amount}.00</p>
+            {/* <p>Items:{order.items.length}</p> */}
+            {/* {selectedorder===order._id.toString()&&( */}
+              <p><span>&#x25cf;</span><b>{order.status}</b></p>
+                   {/* )} */}
+             {/*  */}
+            
+            <button onClick={getorders} className="bg-black w-24 text-sm  text-gray-200 px-3 rounded-2xl hover:scale-110 transition ease-in-out duration-300">TRACK ORDER </button>
+
+          </div>
+        )
+
+      })}
       </div>
-    </div>
+      </div>
+    
   );
 }
 

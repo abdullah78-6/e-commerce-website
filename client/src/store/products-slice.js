@@ -14,7 +14,8 @@ const productslice=createSlice({
         phonenumber:"",
         landmark:""
 
-    }
+    },
+    orders:[]
 },
     reducers:{
         setpname(state,action){
@@ -93,6 +94,9 @@ const productslice=createSlice({
         setorderdata(state,action){
             const {name,value}=action.payload;
             state.orderdata[name]=value;
+        },
+        setorders(state,action){
+            state.orders=action.payload;
         }
 
         

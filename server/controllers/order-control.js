@@ -97,34 +97,71 @@ catch(error){
  }
 }
 
-const verifyorder=async(req,res)=>{
-    const {orderid,success}=req.body;
-    try {
-        if(success=="true"){
-            await ordermodel.findByIdAndUpdate(orderid,{payment:true});
-            res.json({success:true,message:"PAYMENT SUCESSFUL"});
-        }
-        else{
-            await ordermodel.findByIdAndDelete(orderid);
-            res.json({success:false,message:"PAYMENT IS NOT SUCESSFUL"});
-        }
+// const verifyorder=async(req,res)=>{
+//     const {orderid,success}=req.body;
+//     try {
+//         if(success=="true"){
+//             await ordermodel.findByIdAndUpdate(orderid,{payment:true});
+//             res.json({success:true,message:"PAYMENT SUCESSFUL"});
+//         }
+//         else{
+//             await ordermodel.findByIdAndDelete(orderid);
+//             res.json({success:false,message:"PAYMENT IS NOT SUCESSFUL"});
+//         }
         
-    } catch (error) {
-        console.log(error);
-        res.json({success:false,message:"verify order error"});
+//     } catch (error) {
+//         console.log(error);
+//         res.json({success:false,message:"verify order error"});
         
-    }
+//     }
     
 
 
-}
+// }
 const updatestatus=async(req,res)=>{
+    try {
+    
+        if(req.body.status){ 
+            await ordermodel.findByIdAndUpdate(req.body.orderid,{status:req.body.status}); 
+        } 
+        let orders=[];
+        if(req.body.userid){
+            orders=await ordermodel.find({userid:req.body.userid});
+        }
+        res.json({status:true,result:"STATUS UPDATED",ans:orders});
+        //  await ordermodel.findByIdAndUpdate(req.body.orderid,{status:req.body.status}); 
+        //  res.json({status:true,result:"STATUS UPDATED"});
+    
+    } catch (error) {
+        console.log(error);
+        res.json({status:false,result:"UPDATE STATUS ERROR"});
+        
+    }
 
 }
 const getclientorders=async(req,res)=>{
+    try {
+        const orders=await ordermodel.find({userid:req.body.userid});
+        res.json({status:true,result:orders});
+        
+        
+    } catch (error) {
+        console.log(error);
+        res.json({status:false,result:"CLIENT ORDER ERROR "});
+        
+    }
 
 }
 const getadminorder=async(req,res)=>{
-
+    try {
+        const orders=await ordermodel.find({});
+        res.json({status:true,result:orders});
+        
+    } catch (error) {
+        console.log(error);
+        res.json({status:false,result:"ADMIN ORDER ERROR"});
+        
     }
-export {getorder,verifyorder,updatestatus,getclientorders,getadminorder}
+
+}
+export {getorder,updatestatus,getclientorders,getadminorder}
