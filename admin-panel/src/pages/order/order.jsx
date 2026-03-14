@@ -50,7 +50,7 @@ function Orders(){
 
       {/* <ToastContainer /> */}
 
-      <h1 className="text-2xl mb-4">MY ORDERS </h1>
+      <h1 className="text-4xl mb-4 text-pink-800 mt-3">MY ORDERS </h1>
 
       
       {/* <div className="border-2 w-270 ml-3">
@@ -100,31 +100,34 @@ function Orders(){
         ))}
 
       </div> */}
-      <div className="flex justify-center items-center gap-5 w-180">
+      <div className=" flex justify-center items-center  w-180 flex-wrap gap-9  text-xl capitalize text-gray-900">
         {orderfrombackend.map((order,index)=>{
-          return <div key={index}>
-            <h1><IoBag/></h1>
-            <div>
+          return <div className="flex justify-center  flex-row border-2 ml-9 rounded-3xl p-2 bg-white" key={index}>
+            <h1 className="text-amber-900 text-3xl "><IoBag/></h1>
+            <h1 className="text-red-900">ORDER#{index+1}</h1>
+            <div className="flex justify-center items-center flex-wrap gap-0 text-xl">
               <p>{order.items.map((item,index)=>{
                 if(index===order.items.length-1){
-                  return item.name+"QUANTITY"+item.quantity
+                  return item.name+" QUANTITY: "+item.quantity
                 }
                 else{
-                  return item.name+"QUANTITY"+item.quantity+","
+                  return item.name+" QUANTITY: "+item.quantity+","
                 }
 
               })}</p>
-              <p>{order.address.name}</p>
+              <p>NAME:{order.address.name}</p>
               <div>
-                <p>{order.address.address+","}</p>
-                <p>{order.address.city+","+order.address.email+","+order.address.landmark+","+order.address.pincode}</p>
+                <p>ADDRESS:{order.address.address+" , "}</p>
+                <p className="lowercase text-xl">CITY AND PINCODE: {order.address.city+" , "+order.address.email+","+order.address.landmark+","+order.address.pincode}</p>
               </div>
-              <p>{order.address.phonenumber}</p>
-               <select  onChange={(e)=>updatestatus(e,order._id)} >
+              <p className="mb-3  px-5">📞: {order.address.phonenumber}</p>
+              <div className="mb-3">
+               <select className=" border-2  capitalize  border-gray-400 rounded-lg  py-2 focus:outline-none focus:ring-pink-500 px-19"   onChange={(e)=>updatestatus(e,order._id)} >
                 <option value="processing">processing</option>
                 <option value="on the way ">on the way </option>
                 <option value="delivered">delivered</option>
               </select>
+              </div>
               
             </div>
             

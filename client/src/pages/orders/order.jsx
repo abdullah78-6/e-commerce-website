@@ -99,12 +99,13 @@ return (
           </div>
         ))}
       </div> */}
-      <div >
+      
+      <div className="flex justify-center items-center gap-3  flex-wrap ">
       {ordersfrombackend&&ordersfrombackend.map((order,index)=>{
         return (
-          <div key={order._id}>
-            <h1><IoBag /></h1>
-            <p>{order.items.map((item,index)=>{
+          <div className="flex shadow-2xl w-90 px-9 py-9 bg-white flex-col justify-center items-center flex-wrap gap-2 border-2 p-4 rounded-lg text-xl hover:scale-105 transition ease-in duration-150" key={order._id}>
+            <h1 className="text-pink-900 text-4xl"><IoBag /></h1>
+            <p className="text-center text-red-900 capitalize ">{order.items.map((item,index)=>{
               if(index===order.items.length-1){
                 return item.name+ "QUANTITY:" + item.quantity
               }
@@ -112,10 +113,10 @@ return (
                 return item.name+ "QUANTITY:" + item.quantity+","
               }
             })}</p>
-            <p>MRP:₹{order.amount}.00</p>
-            {/* <p>Items:{order.items.length}</p> */}
+            <p className="text-red-900">MRP:₹{order.amount}.00</p>
+            <p>Items:{order.items.length}</p>
             {/* {selectedorder===order._id.toString()&&( */}
-              <p><span>&#x25cf;</span><b>{order.status}</b></p>
+              <p><span>&#x25cf;</span><b className="text-red-700">STATUS:{order.status}</b></p>
                    {/* )} */}
              {/*  */}
             

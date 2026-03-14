@@ -8,7 +8,7 @@ import Order from "./pages/order/order";
 function App() {
     const url="http://localhost:8000"
     return <div>
-        <ToastContainer/>
+        {/* <ToastContainer/> */}
         <Navbar/>
         <hr/>
         <div className="flex">

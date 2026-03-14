@@ -29,16 +29,15 @@ function Add({url}){
         const response =await  axios.post(`${url}/api/store/add`,formdata);
         if(response.data.status){
             setimage(false);
-            data({
-                name:"",
-                description:"",
-                price:"",
-                category:"MENS COLLECTION"
-            })
-            toast.success(response.data.message);
+            dispatch(control.setdata({name:"name",value:""}));
+            dispatch(control.setdata({name:"description",value:""}));
+            dispatch(control.setdata({name:"price",value:""}));
+            dispatch(control.setdata({name:"category",value:"MENS COLLECTION"}));
+            
+         toast.success(response.data.result);
         }
         else{
-            toast.error("SIMETHING WENT WRONG ");
+            toast.error(response.data.result);
         }
        
         
