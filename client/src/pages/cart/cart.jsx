@@ -82,14 +82,14 @@ function ShoopingCart(){
 
     
     <div className="flex justify-center mt-[-9px] items-center overflow-x-auto">
-      <ul className="flex justify-between mt-[-9px] items-center gap-16 p-4 text-center capitalize text-lg md:text-lg  rounded-2xl  min-w-[900px]">
+      <ul className="flex justify-between mt-[-9px] items-center gap-16 p-4 text-center capitalize text-lg md:text-lg  rounded-2xl  min-w-[200px]">
         <li className="w-32">product image</li>
         <li className="w-32">increase quantity</li>
         <li className="w-32">product name</li>
         <li className="w-32">single product price</li>
-        <li className="w-24">quantity</li>
+        <li className="w-34">quantity</li>
         <li className="w-32">total price</li>
-        <li className="w-24">remove product</li>
+        <li className="w-34">remove product</li>
       </ul>
     </div>
 

@@ -100,10 +100,10 @@ return (
         ))}
       </div> */}
       
-      <div className="flex justify-center items-center gap-3  flex-wrap ">
+      <div className="flex justify-center items-center gap-3  flex-wrap overflow-x-scroll md:overflow-x-hidden lg:overflow-x-hidden xl:overflow-x-hidden    md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
       {ordersfrombackend&&ordersfrombackend.map((order,index)=>{
         return (
-          <div className="flex shadow-2xl w-90 px-9 py-9 bg-white flex-col justify-center items-center flex-wrap gap-2 border-2 p-4 rounded-lg text-xl hover:scale-105 transition ease-in duration-150" key={order._id}>
+          <div className="flex shadow-2xl w-80 px-2 py-2 bg-white flex-col justify-center items-center flex-wrap gap-2 border-2 p-4 rounded-lg text-xl hover:scale-105 transition ease-in duration-150  " key={order._id}>
             <h1 className="text-pink-900 text-4xl"><IoBag /></h1>
             <p className="text-center text-red-900 capitalize ">{order.items.map((item,index)=>{
               if(index===order.items.length-1){
@@ -120,7 +120,7 @@ return (
                    {/* )} */}
              {/*  */}
             
-            <button onClick={getorders} className="bg-black w-24 text-sm  text-gray-200 px-3 rounded-2xl hover:scale-110 transition ease-in-out duration-300">TRACK ORDER </button>
+            <button onClick={getorders} className="bg-black w-24 text-sm  text-gray-200 px-3 rounded-2xl hover:scale-110 transition ease-in-out duration-100">TRACK ORDER </button>
 
           </div>
         )

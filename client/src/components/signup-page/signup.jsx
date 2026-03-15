@@ -71,7 +71,7 @@ const onlogin=async(event)=>{
 }
     return <div className="inset-0 fixed flex flex-col justify-center items-center bg-black/40 backdrop-blur-sm  ">
     
-        <form className="flex flex-col gap-6 shadow-2xl w-[420px] bg-white rounded-3xl  p-7"onSubmit={onlogin} >
+        <form className="flex flex-col gap-6 shadow-2xl w-[300px] md:w-[420px] xl:w-[420px] lg:w-[420px] bg-white rounded-3xl  p-7"onSubmit={onlogin} >
              <div className="relative">
             <h1 className="cursor-pointer absolute text-3xl text-red-500 bottom-1 top-4 right-6" onClick={()=>loginstatuschange(false)}>X</h1>
         </div>
@@ -80,7 +80,7 @@ const onlogin=async(event)=>{
             <label className="text-lg font-semibold text-pink-900" htmlFor="name">ENTER-NAME</label>
             </div>
             <div>
-            <input name="name" onChange={Onchangehandler} value={logindatastructure.name} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700"  type="text"placeholder="enter-name"required/>
+            <input name="name" onChange={Onchangehandler} value={logindatastructure.name} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700 w-50 md:w-auto lg:w-auto xl:w-auto"  type="text"placeholder="enter-name"required/>
             </div>
             
             
@@ -93,7 +93,7 @@ const onlogin=async(event)=>{
             <label className="text-lg font-semibold text-pink-900" htmlFor="email">ENTER-EMAIL</label>
             </div>
             <div>
-            <input name="email" onChange={Onchangehandler} value={logindatastructure.email} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700" type="text"placeholder="enter-email" required/>
+            <input name="email" onChange={Onchangehandler} value={logindatastructure.email} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700 w-50 md:w-auto lg:w-auto xl:w-auto" type="text"placeholder="enter-email" required/>
             </div>
         </div>
         
@@ -103,7 +103,7 @@ const onlogin=async(event)=>{
             <label className="text-lg font-semibold text-pink-900" htmlFor="password">ENTER-PASSWORD</label>
             </div>
             <div className="flex gap-3 items-center">
-            <input name="password" onChange={Onchangehandler} value={logindatastructure.password} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700" type={inputtype}placeholder="enter-password" required/>
+            <input name="password" onChange={Onchangehandler} value={logindatastructure.password} className=" border border-pink-500 p-2 rounded-3xl text-2xl text-gray-700 w-50 md:w-auto lg:w-auto xl:w-auto" type={inputtype}placeholder="enter-password" required/>
             {inputtype==="text"?<FaRegEye className="text-2xl text-pink-800" onClick={()=>changeinginp("password")}/>:<FaEyeSlash className="text-2xl text-pink-800" onClick={()=>changeinginp("text")}/>}
             </div>
         </div>

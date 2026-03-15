@@ -58,11 +58,11 @@ function Navbar(){
         <div>
             
             
-            <Link to="/" className="text-4xl text-gray-800">CLOTHES-<span className="text-pink-600">SHOP</span></Link>
+            <Link to="/" className="text-sm md:text-2xl lg:text-2xl xl:text-2xl text-gray-800">CLOTHES-<span className="text-pink-600">SHOP</span></Link>
     
 
         </div>
-        <ul className="mt-0 flex  justify-center items-center gap-12 capitalize text-xl cursor-pointer text-gray-800">
+        <ul className="hidden  md:mt-0 md:flex  md:justify-center md:items-center md:gap-12 md:capitalize md:text-xl md:cursor-pointer md:text-gray-800 lg:mt-0 lg:flex  lg:justify-center lg:items-center lg:gap-12 lg:capitalize lg:text-xl lg:cursor-pointer lg:text-gray-800 xl:mt-0 xl:flex  xl:justify-center xl:items-center xl:gap-12 xl:capitalize xl:text-xl xl:cursor-pointer xl:text-gray-800 md:hidden">
             <Link to="/" onClick={()=>change("home")} className={finalnavclass==="home"?"border-b-4 border-b-pink-600":""}>home</Link>
             <a href="#f" onClick={()=>change("contact-us")} className={finalnavclass==="contact-us"?"border-b-4 border-b-pink-600":""}>contact-us</a>
             <a href="#m" onClick={()=>change("mobile-app")} className={finalnavclass==="mobile-app"?"border-b-4 border-b-pink-600":""}>mobile-app</a>
@@ -87,20 +87,20 @@ function Navbar(){
 
             </div>
             <div>
-                {token?<Link to="/orders" className="text-pink-700 hover:underline"> My Orders</Link>:<></>}
+                {token?<Link to="/orders" className="text-pink-700 hover:underline text-lg"> My Orders</Link>:<></>}
             </div>
             <div className="flex justify-center items-cnter">
                 <div>
          {token?<div className="flex gap-5"  >
-            <h1  className="bg-white p-4 rounded-4xl py-2 text-gray-900  border-2 border-pink-700 text-lg ">{backendemail?backendemail.slice(0,1):""}</h1>
+            <h1  className="bg-white p-2 md:p-4 xl:p-4 lg:p-4 rounded-4xl py-0 md:py-2 xl:py-2 lg:py-2 text-gray-900  border-2 border-pink-700 text-lg ">{backendemail?backendemail.slice(0,1):""}</h1>
             {/* <select className="mt-3" onChange={(e)=>logout(e.target.value)}>
             <option  value="Logout">Logout</option>
             </select> */}
-            <button onClick={logout} className="text-xl capitalize bg-red-700 p-3 rounded-4xl text-gray-800 hover:bg-red-900">logout </button>
+            <button onClick={logout} className="text-sm md:text-xl lg:text-xl xl:text-xl capitalize bg-red-700 p-1 xl:p-2 lg:p-2 md:p-2 rounded-3xl text-gray-200 hover:bg-red-900">logout </button>
 
          </div>
          
-         :<button onClick={()=>updateloginstatus(true)} className="text-2xl capitalize rounded-4xl border border-pink-600  text-pink-600 p-2 hover:bg-pink-600 hover:text-white">log-in</button>}      
+         :<button onClick={()=>updateloginstatus(true)} className="text-2xl capitalize rounded-4xl border border-pink-600  text-pink-600 p-2 hover:bg-pink-600 hover:text-white">login</button>}      
          </div>
          </div>
             
