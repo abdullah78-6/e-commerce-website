@@ -100,10 +100,10 @@ function Orders(){
         ))}
 
       </div> */}
-      <div className=" flex justify-center items-center  w-180 flex-wrap gap-9  text-xl capitalize text-gray-900">
+      <div className=" flex justify-center items-center ml-22 max-w-6xl flex-wrap gap-9  text-xl capitalize text-gray-900">
         {orderfrombackend.map((order,index)=>{
           return <div className="flex justify-center  flex-row border-2 ml-9 rounded-3xl p-2 bg-white" key={index}>
-            <h1 className="text-amber-900 text-3xl "><IoBag/></h1>
+            <h1 className="text-pink-900 text-3xl "><IoBag/></h1>
             <h1 className="text-red-900">ORDER#{index+1}</h1>
             <div className="flex justify-center items-center flex-wrap gap-0 text-xl">
               <p>{order.items.map((item,index)=>{

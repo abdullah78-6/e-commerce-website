@@ -6,7 +6,7 @@ import {Link, useNavigate} from "react-router-dom"
 import { productlist } from "../../assests/index.js";
 import { useEffect } from "react";
 import {toast} from "react-toastify"
-
+import { IoLocationSharp } from "react-icons/io5";
 function Navbar(){
     const dispatch=useDispatch();
     const finalnavclass=useSelector(state=>state.main.navclass);
@@ -18,6 +18,7 @@ function Navbar(){
     const totalquantity=useSelector(state=>state.main2.totalquantity);
     const profileicon=useSelector(state=>state.main.profileicon);
     const backendemail=useSelector(state=>state.main.backendemail);
+    const cityname=useSelector(state=>state.main2.cityname);
     const navigate=useNavigate();
     useEffect(()=>{
         dispatch(manage.settotalquantity());
@@ -62,7 +63,11 @@ function Navbar(){
     
 
         </div>
-        <ul className="hidden  md:mt-0 md:flex  md:justify-center md:items-center md:gap-12 md:capitalize md:text-xl md:cursor-pointer md:text-gray-800 lg:mt-0 lg:flex  lg:justify-center lg:items-center lg:gap-12 lg:capitalize lg:text-xl lg:cursor-pointer lg:text-gray-800 xl:mt-0 xl:flex  xl:justify-center xl:items-center xl:gap-12 xl:capitalize xl:text-xl xl:cursor-pointer xl:text-gray-800 md:hidden">
+        <div className="flex justify-center items-center gap-1 ">
+            <h1 className="text-xl text-pink-900 "><IoLocationSharp /></h1>
+            <h1 className="text-gray-900 mt-5 text-sm">{cityname}</h1>
+        </div>
+        <ul className="hidden  md:mt-0 md:flex  md:justify-center md:items-center md:gap-12 md:capitalize md:text-xl md:cursor-pointer md:text-gray-800 lg:mt-0 lg:flex  lg:justify-center lg:items-center lg:gap-12 lg:capitalize lg:text-sm lg:cursor-pointer lg:text-gray-800 xl:mt-0 xl:flex  xl:justify-center xl:items-center xl:gap-12 xl:capitalize xl:text-xl xl:cursor-pointer xl:text-gray-800 md:hidden">
             <Link to="/" onClick={()=>change("home")} className={finalnavclass==="home"?"border-b-4 border-b-pink-600":""}>home</Link>
             <a href="#f" onClick={()=>change("contact-us")} className={finalnavclass==="contact-us"?"border-b-4 border-b-pink-600":""}>contact-us</a>
             <a href="#m" onClick={()=>change("mobile-app")} className={finalnavclass==="mobile-app"?"border-b-4 border-b-pink-600":""}>mobile-app</a>

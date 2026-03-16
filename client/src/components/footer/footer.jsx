@@ -1,8 +1,40 @@
+import { useEffect } from "react";
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-
+import {useDispatch} from "react-redux"
+import { manage } from "../../store/products-slice";
+import axios from "axios"
 function Footer() {
-  return (
+  const dispatch=useDispatch();
+
+// const apikey="47fac61afc4b40cfa793600b7b9ce5bb";
+const apikey="eb63b27e49f54a35b4940fec9ee05cb2";
+ useEffect(()=>{
+  if(!navigator.geolocation){
+    dispatch(manage.setcityname("PLEASE TURN ON YOUR LOCATION "));
+    return ;
+   }
+  navigator.geolocation.getCurrentPosition(async(position)=>{
+   const  latitude=position.coords.latitude;
+   const  longitude=position.coords.longitude;
+   
+   const response=await axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&type=postcode&format=json&apiKey=${apikey}`);
+    const district=response?.data?.results?.[0]?.county;
+    if(district){
+      dispatch(manage.setcityname(district));
+      
+    }
+   
+    
+  }, (err)=>{
+      dispatch(manage.setcityname("PLEASE  ON YOUR LOCATION "));
+
+    }
+  
+)
+  
+ },[]);
+ return (
     <div className="bg-gray-900 text-white py-10 px-6 flex flex-wrap justify-between items-start gap-10 mt-20 font-semibold" id="f">
       
       

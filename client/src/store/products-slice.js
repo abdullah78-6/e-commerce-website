@@ -15,7 +15,8 @@ const productslice=createSlice({
         landmark:""
 
     },
-    orders:[]
+    orders:[],
+    cityname:""
 },
     reducers:{
         setpname(state,action){
@@ -97,6 +98,9 @@ const productslice=createSlice({
         },
         setorders(state,action){
             state.orders=action.payload;
+        },
+        setcityname(state,action){
+            state.cityname=action.payload;
         }
 
         

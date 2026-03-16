@@ -4,7 +4,7 @@ import { control } from "../../redux/slice";
 function Navbar(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    return <div className="bg-pink-400 capitalize font-semibold text-gray-900  px-8 py-8 ">
+    return <div className="bg-pink-400 capitalize font-semibold text-gray-900  px-8 py-8 min-w-3xl ">
         <div className="flex flex-col justify-center items-start cursor-pointer">
         <div>
             
@@ -15,6 +15,11 @@ function Navbar(){
             <p className="text-gray-800 text-xl">admin-panel</p>
         </div>
         </div>
+        <ul className="flex justify-center items-center  gap-10 lg:hidden xl:hidden capitalize text-xl">
+            <Link className="hover:underline text-blue-600" to="/add">add</Link>
+            <Link className="hover:underline text-blue-600" to="/list">item-list</Link>
+            <Link className="hover:underline text-blue-600" to="/order">orders</Link>
+        </ul>
         
         <ul className="flex justify-end items-center ">
             <li className="">
