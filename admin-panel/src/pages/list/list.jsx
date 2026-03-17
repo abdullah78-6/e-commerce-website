@@ -7,9 +7,12 @@ function List({url}){
   const dispatch=useDispatch();
     const lists=useSelector(state=>state.ainfo.list);
     const backenddata=useSelector(state=>state.ainfo.backenddata);
-  
-   
-    const fetchproductdata=async()=>{
+    const token=useSelector(state=>state.ainfo.token);
+  const fetchproductdata=async()=>{
+    if(!token){
+      toast.error("ADMIN LOGIN REQUIRED");
+      return ;
+    }
       const newurl=url;
       const response=await axios.get(`${newurl}/api/store/get`); 
       if(response.data.status){
@@ -66,7 +69,7 @@ return (
         </div>
 
       
-        {backenddata.map((i, index) => (
+        {token&&backenddata.map((i, index) => (
           <div
             key={index}
             className="flex text-center items-center py-3 border-t-2 text-2xl text-gray-800 "

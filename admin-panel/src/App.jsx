@@ -5,11 +5,16 @@ import { ToastContainer } from 'react-toastify';
 import Add from "./pages/add/add";
 import List from "./pages/list/list";
 import Order from "./pages/order/order";
+import { useDispatch, useSelector } from "react-redux";
+import Login from "./components/loginpopup/loginpopup";
 function App() {
+    const dispatch=useDispatch();
+    const login=useSelector(state=>state.ainfo.login);
     const url="http://localhost:8000"
     return <div>
         {/* <ToastContainer/> */}
         <Navbar/>
+        {login?<Login/>:<></>}
         <hr/>
         <div className="flex">
         <Sidebar/>

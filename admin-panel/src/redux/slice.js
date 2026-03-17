@@ -9,6 +9,12 @@ const adminslice=createSlice({
         category:"MENS COLLECTION"
 
     },
+    login:false,
+    logs:{
+        email:"",
+        password:"",
+    },
+    token:"",
    backenddata:[],
     orders:[],
     list:[
@@ -56,6 +62,11 @@ const adminslice=createSlice({
            state.data[name]=value;
 
         },
+        setlogs(state,action){
+            const {name,value}=action.payload;
+            state.logs[name]=value;
+
+        },
         setbackenddata(state,action){
             state.backenddata=action.payload;
             
@@ -63,6 +74,12 @@ const adminslice=createSlice({
         setorders(state,action){
             state.orders=action.payload;
         },
+        setlogin(state,action){
+            state.login=action.payload;
+        },
+        settoken(state,action){
+            state.token=action.payload;
+        }
        
         
 

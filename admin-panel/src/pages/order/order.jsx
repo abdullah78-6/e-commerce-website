@@ -8,10 +8,15 @@ function Orders(){
     const lists=useSelector(state=>state.ainfo.list);
     // order from client side=>server to admin panel 
     const orderfrombackend=useSelector(state=>state.ainfo.orders);
+    const token=useSelector(state=>state.ainfo.token);
    
     const dispatch=useDispatch();
     const url="http://localhost:8000"
     const getorderadmin=async()=>{
+      if(!token){
+        toast.error("ADMIN LOGIN REQUIRED");
+        return ;
+      }
       const newurl=url;
       try {
         const response=await axios.get(`${newurl}/api/order/aorder`);
@@ -101,7 +106,7 @@ function Orders(){
 
       </div> */}
       <div className=" flex justify-center items-center ml-22 max-w-6xl flex-wrap gap-9  text-xl capitalize text-gray-900">
-        {orderfrombackend.map((order,index)=>{
+        {token&&orderfrombackend.map((order,index)=>{
           return <div className="flex justify-center  flex-row border-2 ml-9 rounded-3xl p-2 bg-white" key={index}>
             <h1 className="text-pink-900 text-3xl "><IoBag/></h1>
             <h1 className="text-red-900">ORDER#{index+1}</h1>

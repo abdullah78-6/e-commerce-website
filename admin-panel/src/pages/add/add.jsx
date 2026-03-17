@@ -7,6 +7,7 @@ import axios from "axios";
 function Add({url}){
     const[image,setimage]=useState(false);
     const data=useSelector(state=>state.ainfo.data);
+    const token=useSelector(state=>state.ainfo.token);
     const dispatch=useDispatch();
     const onchangehandler=(event)=>{
         dispatch(control.setdata({
@@ -16,6 +17,10 @@ function Add({url}){
     }
     const onsubmithandler=async(event)=>{
         event.preventDefault();
+        if(!token){
+            toast.error("ADMIN LOGIN REQUIRED");
+            return ;
+        }
        if(!image){
             toast.error("PLEASE UPLOAD IMAGE ");
             return ;
