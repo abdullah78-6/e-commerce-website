@@ -76,8 +76,9 @@ return (
           >
             
             <div className="w-1/5 flex justify-center">
+              {/* src={`${url}/images/`+i.image} */}
               <img
-                src={`${url}/images/`+i.image}
+              src={i.image}
                 alt=""
                 className="w-16 h-16 object-contain"
               />

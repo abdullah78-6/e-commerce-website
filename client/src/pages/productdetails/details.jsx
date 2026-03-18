@@ -46,10 +46,10 @@ function Details(){
 
 
     <div className=" p-6 rounded-3xl shadow-lg flex flex-col items-center text-center hover:shadow-xl transition">
-      
+      {/* src={`${url}/images/`+productimage} */}
       <img
         className="w-72 p-3 rounded-3xl shadow-md object-cover"
-        src={`${url}/images/`+productimage}
+        src={productimage}
         alt={productimage}
         loading="lazy"
       />

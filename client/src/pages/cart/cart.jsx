@@ -108,9 +108,10 @@ function ShoopingCart(){
                 key={item._id}
                 className="flex justify-between items-center gap-16  p-4 text-center  rounded-xl shadow-sm hover:shadow-md transition min-w-[900px]"
               >
+                {/* src={`${url}/images/`+item.image} */}
                 <img
                   className="w-24 h-24 object-cover rounded-2xl"
-                  src={`${url}/images/`+item.image}
+                  src={item.image}
                   alt={item.name}
                 />
 

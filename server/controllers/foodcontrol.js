@@ -1,5 +1,11 @@
 import fs from "fs"
 import fashionmodel from "../models/fashionmodel.js"
+import {v2 as cloudinary} from "cloudinary"
+cloudinary.config({
+    cloud_name:process.env.cloudinaryname,
+    api_key:process.env.cloudinaryapikey,
+    api_secret:process.env.cloudinaryapisecret,
+})
 const additem=async(req,res)=>{
     try {
          if(!req.file){
@@ -11,12 +17,18 @@ const additem=async(req,res)=>{
     if(!name||!description||!price||!category){
         return res.json({status:false,result:"ALL FIELDS ARE REQUIRED"});
     }
+    // cloudinary
+    const result=await cloudinary.uploader.upload(req.file.path,{
+        folder:"uploads",
+    })
     const fashionstore=new fashionmodel({
         name,
         description,
         price:Number(price),
         category,
-        image:req.file.filename
+        localfile:req.file.filename,
+        image:result.secure_url,
+        public_id:result.public_id
     })
     
         await fashionstore.save();
@@ -45,7 +57,21 @@ const getitem=async(req,res)=>{
 const deleteitem=async(req,res)=>{
     try {
         const fproduct=await fashionmodel.findById(req.body.id);
-        fs.unlink(`uploads/${fproduct.image}`,()=>{});
+      if(!fproduct){
+    return  res.json({success:false,result:"PRODUCT NOT FOUND"});
+
+        }
+        if(fproduct){
+            fs.unlink(`uploads/${fproduct.localfile}`,()=>{});
+
+        }
+         console.log("this is public id ",fproduct.public_id);
+    if(fproduct.public_id){
+           
+            await cloudinary.uploader.destroy(fproduct.public_id);
+
+        }
+        
         await fashionmodel.findByIdAndDelete(req.body.id);
          res.json({success:true,result:"DATA DELETED SUCESSFULLY "});
         
