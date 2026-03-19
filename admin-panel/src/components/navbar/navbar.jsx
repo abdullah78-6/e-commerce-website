@@ -37,9 +37,10 @@ function Navbar(){
             <Link className="hover:underline text-blue-600" to="/order">orders</Link>
         </ul>
         
-        <ul className="flex justify-end items-center ">
-         {token?   <li className="">
+        <ul className="flex  justify-end items-center flex-wrap ">
+         {token?   <li className="flex flex-wrap">
                 <img src="src\assets\profile_image.png" alt="profile image"/>
+                
             </li>
             :<></>}
             {!token?<button className=" border   border-pink-800 bg-white p-2 rounded-2xl text-pink-900 hover:bg-pink-900 hover:text-white capitalize"onClick={()=>dispatch(control.setlogin(true))} >signin</button>:<button className=" border  border-pink-800 bg-yellow-300 p-2 ml-4 rounded-2xl text-pink-900 hover:bg-pink-900 hover:text-white capitalize" onClick={logout}>Logout</button>}

@@ -63,9 +63,9 @@ function Navbar(){
     
 
         </div>
-        <div className="flex justify-center items-center gap-1 ">
-            <h1 className="text-xl text-pink-900 "><IoLocationSharp /></h1>
-            <h1 className="text-gray-900 mt-5 text-sm">{cityname}</h1>
+        <div className="flex justify-center items-center gap-0 ">
+            <h1 className="text-xl text-pink-700 "><IoLocationSharp /></h1>
+            <p className="text-gray-900 mt-9 text-sm ">{cityname}</p>
         </div>
         <ul className="hidden  md:mt-0 md:flex  md:justify-center md:items-center md:gap-12 md:capitalize md:text-xl md:cursor-pointer md:text-gray-800 lg:mt-0 lg:flex  lg:justify-center lg:items-center lg:gap-12 lg:capitalize lg:text-sm lg:cursor-pointer lg:text-gray-800 xl:mt-0 xl:flex  xl:justify-center xl:items-center xl:gap-12 xl:capitalize xl:text-xl xl:cursor-pointer xl:text-gray-800 md:hidden">
             <Link to="/" onClick={()=>change("home")} className={finalnavclass==="home"?"border-b-4 border-b-pink-600":""}>home</Link>
@@ -77,7 +77,7 @@ function Navbar(){
              
             <div >
                     
-            <Link to="/cart" className="text-3xl relative text-pink-900">
+            <Link to="/cart" className="text-3xl relative text-pink-700">
             <h1 className="mt-3"><FaCartShopping /></h1>
             {carttotal===0?"":
             <div className="bg-pink-600 absolute w-7 h-7 p-4   bottom-6.5 top-0.7 rounded-4xl left-5">
@@ -92,11 +92,11 @@ function Navbar(){
 
             </div>
             <div>
-                {token?<Link to="/orders" className="text-pink-700 hover:underline text-lg"> My Orders</Link>:<></>}
+                {token?<Link to="/orders" className="text-pink-700 hover:underline text-sm "> Orders</Link>:<></>}
             </div>
             <div className="flex justify-center items-cnter">
                 <div>
-         {token?<div className="flex gap-5"  >
+         {token?<div className="flex gap-5 flex-wrap"  >
             <h1  className="bg-white p-2 md:p-4 xl:p-4 lg:p-4 rounded-4xl py-0 md:py-2 xl:py-2 lg:py-2 text-gray-900  border-2 border-pink-700 text-lg ">{backendemail?backendemail.slice(0,1):""}</h1>
             {/* <select className="mt-3" onChange={(e)=>logout(e.target.value)}>
             <option  value="Logout">Logout</option>

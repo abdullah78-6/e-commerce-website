@@ -99,10 +99,15 @@ const Placeorder=()=>{
             <label className="w-40 text-right">ENTER LANDMARK</label>
             <input name="landmark" onChange={onchangehandler} value={orderdata.landmark} className="w-72 border-2 p-2 rounded-3xl" type="text" placeholder="ex: near xyz store" required />
           </div>
+          <div className="flex items-center gap-6 flex-col md:flex-row lg:flex-row xl:flex-row">
+            <p className="text-sm w-70 capitalize text-pink-600">I accepted that my  payement method is cash on delivery </p>
+            <input className="" type="checkbox" required/>
+
+          </div>
 
           <div className="text-center">
             <button type="submit" className="mt-6 bg-pink-700 px-6 py-3 text-xl rounded-full font-semibold text-white hover:bg-pink-900 transition">
-              PAY-NOW
+              PLACE-ORDER
             </button>
           </div>
 

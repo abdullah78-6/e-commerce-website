@@ -11,7 +11,7 @@ function Footer() {
 const apikey="eb63b27e49f54a35b4940fec9ee05cb2";
  useEffect(()=>{
   if(!navigator.geolocation){
-    dispatch(manage.setcityname("PLEASE TURN ON YOUR LOCATION "));
+    dispatch(manage.setcityname(" TURN ON YOUR GPS "));
     return ;
    }
   navigator.geolocation.getCurrentPosition(async(position)=>{
@@ -20,6 +20,8 @@ const apikey="eb63b27e49f54a35b4940fec9ee05cb2";
    
    const response=await axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&type=postcode&format=json&apiKey=${apikey}`);
     const district=response?.data?.results?.[0]?.county;
+    // const result=response?.data?.results?.[0];
+    // const cityname=result?.city||result?.town||result?.village||result?.state_district||result?.county;
     if(district){
       dispatch(manage.setcityname(district));
       
@@ -27,7 +29,7 @@ const apikey="eb63b27e49f54a35b4940fec9ee05cb2";
    
     
   }, (err)=>{
-      dispatch(manage.setcityname("PLEASE  ON YOUR LOCATION "));
+      dispatch(manage.setcityname("TURN  ON YOUR GPS "));
 
     }
   
