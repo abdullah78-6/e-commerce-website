@@ -15,7 +15,7 @@ const dispatch=useDispatch();
 
     }
     const login=async(e)=>{
-        const apiurl="https://e-commerce-website-main-server.onrender.com";
+        const apiurl="https://e-commerce-website-main-server.onrender.com/api/admin/sig";
         e.preventDefault();
         try {
             const response=await axios.post(apiurl,logs);
