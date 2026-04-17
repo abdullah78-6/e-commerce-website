@@ -10,7 +10,7 @@ import Login from "./components/loginpopup/loginpopup";
 function App() {
     const dispatch=useDispatch();
     const login=useSelector(state=>state.ainfo.login);
-    const url="http://localhost:8000"
+    const url="https://e-commerce-website-main-server.onrender.com"
     return <div>
         {/* <ToastContainer/> */}
         <Navbar/>
