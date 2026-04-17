@@ -10,7 +10,7 @@ const finalcategory=useSelector(state=>state.main.category);
   const backenddata=useSelector(state=>state.main2.backenddata);
 const navigate=useNavigate();
 const dispatch=useDispatch();
-const url="http://localhost:8000";
+const url="https://e-commerce-website-main-server.onrender.com";
  const fetchproductdata=async()=>{
       const newurl=url;
       const response=await axios.get(`${newurl}/api/store/get`); 
