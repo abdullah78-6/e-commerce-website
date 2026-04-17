@@ -39,7 +39,7 @@ function Navbar(){
         
         <ul className="flex  justify-end items-center flex-wrap ">
          {token?   <li className="flex flex-wrap">
-                <img src="src\assets\profile_image.png" alt="profile image"/>
+                <img src="/profile_image.png" alt="profile image"/>
                 
             </li>
             :<></>}
