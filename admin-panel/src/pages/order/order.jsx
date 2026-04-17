@@ -11,7 +11,7 @@ function Orders(){
     const token=useSelector(state=>state.ainfo.token);
    
     const dispatch=useDispatch();
-    const url="http://localhost:8000"
+    const url="https://e-commerce-website-main-server.onrender.com"
     const getorderadmin=async()=>{
       if(!token){
         toast.error("ADMIN LOGIN REQUIRED");
