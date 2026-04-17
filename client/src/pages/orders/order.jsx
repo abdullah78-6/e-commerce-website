@@ -9,7 +9,7 @@ function Order() {
   const ordersfrombackend=useSelector(state=>state.main2.orders);
 const token=useSelector(state=>state.main.token);
 const[selectedorder,setselectedorder]=useState(null);
-  const url="http://localhost:8000"
+  const url="https://e-commerce-website-main-server.onrender.com"
   const getorders=async()=>{
     if(!token){
       return ;
