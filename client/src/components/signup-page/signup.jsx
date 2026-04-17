@@ -10,7 +10,7 @@ function Signin(){
     const logintype=useSelector(state=>state.main.statelog);
     const inputtype=useSelector(state=>state.main.input);
     const logindatastructure=useSelector(state=>state.main.logindata);
-    const url="http://localhost:8000"
+    const url="https://e-commerce-website-main-server.onrender.com"
     function loginstatuschange(status){
         dispatch(control.setlogin(false));;
     }
