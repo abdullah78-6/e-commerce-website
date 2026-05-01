@@ -15,7 +15,7 @@ function Details(){
     const token=useSelector(state=>state.main.token);
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    const url="http://localhost:8000";
+    const url="https://e-commerce-website-main-server.onrender.com";
     useEffect(()=>{
         if(!productid){
             navigate("/");
