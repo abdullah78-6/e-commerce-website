@@ -18,7 +18,7 @@ function ShoopingCart(){
     const token=useSelector(state=>state.main.token);
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    const url="http://localhost:8000"
+    const url="https://e-commerce-website-main-server.onrender.com"
     const fetchproductdata=async()=>{
       const newurl=url;
       const response=await axios.get(`${newurl}/api/store/get`); 
