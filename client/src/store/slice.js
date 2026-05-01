@@ -8,7 +8,7 @@ const eslice=createSlice({
     },
     profileicon:false,
     backendemail:"",
-    token:""
+    token:false
 },
     reducers:{
         setnavclass(state,action){

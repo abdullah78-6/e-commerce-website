@@ -2,22 +2,59 @@ import { Link, useNavigate } from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux"
 import { control } from "../../redux/slice";
 import { useEffect } from "react";
-function Navbar(){
+import axios from "axios"
+import {toast} from "react-toastify"
+function Navbar({url}){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const token=useSelector(state=>state.ainfo.token);
-    useEffect(()=>{
-       const loadadmin=()=>{
-        const finaltoken=localStorage.getItem("admintoken");
-        if(finaltoken){
-            dispatch(control.settoken(finaltoken));
-         }
-    }
-       loadadmin();
-},[]);
-    const logout=()=>{
-        localStorage.removeItem("admintoken");
-        dispatch(control.settoken(""));
+//     useEffect(()=>{
+//        const loadadmin=()=>{
+//         const finaltoken=localStorage.getItem("admintoken");
+//         if(finaltoken){
+//             dispatch(control.settoken(finaltoken));
+//          }
+//     }
+//        loadadmin();
+// },[]);
+useEffect(()=>{
+        const fetchuser=async()=>{
+            try {
+                const res=await axios.get(url+"/api/admin/pr",{
+                    withCredentials:true
+                })
+                if(res.data.status){
+                    // dispatch(control.setbackendemail(res.data.email));
+                    dispatch(control.settoken(true));
+                }
+                else{
+                    // dispatch(control.setbackendemail(""));
+                    dispatch(control.settoken(false));
+                }
+            } catch (error) {
+                // dispatch(control.setbackendemail(""));
+                dispatch(control.settoken(false));
+                
+            }
+        };
+        fetchuser();
+
+    },[]);
+    const logout=async()=>{
+        // localStorage.removeItem("admintoken");
+        // dispatch(control.settoken(""));
+        const response=await axios.post(url+"/api/admin/out",{},{
+            withCredentials:true
+        });
+        if(response.data.status){
+            // dispatch(control.setbackendemail(""));
+            dispatch(control.settoken(false));
+        toast.success(response.data.message);
+
+        }
+        else{
+            toast.error(response.data.message);
+        }
 
     }
     return <div className="bg-pink-400 capitalize font-semibold text-gray-900  px-8 py-8 min-w-3xl ">

@@ -8,7 +8,8 @@ const Placeorder=()=>{
     const orderdata=useSelector(state=>state.main2.orderdata);
     const backenddata=useSelector(state=>state.main2.backenddata);
     const cartdetails=useSelector(state=>state.main2.cartdetails);
-    const token=localStorage.getItem("token");
+    // const token=localStorage.getItem("token");
+    const token=useSelector(state=>state.main.token);
     const dispatch=useDispatch();
     const url="http://localhost:8000";
     const onchangehandler=(event)=>{
@@ -37,7 +38,7 @@ const Placeorder=()=>{
         items:orderitems,
         amount:totalprice+150
       }
-      let response=await axios.post(url+"/api/order/det",orderdata2,{headers:{token}});
+      let response=await axios.post(url+"/api/order/det",orderdata2,{withCredentials:true});
       if(response.data.success){
         const {sessionurl}=response.data;
         // window.location.replace(sessionurl);

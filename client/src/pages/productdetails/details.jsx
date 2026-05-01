@@ -26,15 +26,15 @@ function Details(){
 
     },[productid,navigate]);
     const Addtocart=async()=>{
-      if(!localStorage.getItem("token")){
+      if(!token){
         toast.error("PLEASE CREATE AN ACCOUNT ");
         return ;
       }
       dispatch(manage.setaddtocart(productid));
       let itemid=productid;
       
-      if(localStorage.getItem("token")){
-        await axios.post(url+"/api/cart/inc",{itemid},{headers:{token}});
+      if(token){
+        await axios.post(url+"/api/cart/inc",{itemid},{withCredentials:true});
         
       }
 

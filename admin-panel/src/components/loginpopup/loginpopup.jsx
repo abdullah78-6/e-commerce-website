@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { control } from "../../redux/slice";
 import axios from "axios"
 import {ToastContainer,toast} from "react-toastify";
-const Login=()=>{
+const Login=({url})=>{
 const dispatch=useDispatch();
     const logs=useSelector(state=>state.ainfo.logs);
     const onchangehandler=(event)=>{
@@ -14,26 +14,42 @@ const dispatch=useDispatch();
    
 
     }
+   
     const login=async(e)=>{
-        const apiurl="http://localhost:8000/api/admin/sig";
+        // const apiurl=url+"/api/admin/sig";
         e.preventDefault();
         try {
-            const response=await axios.post(apiurl,logs);
+            const response=await axios.post(url+"/api/admin/sig",logs,{
+            withCredentials:true    
+            });
                 
-            if(response.data.status){
+            if(!response.data.status){
 
             
-            localStorage.setItem("admintoken",response.data.token);
-            dispatch(control.settoken(response.data.token));
+            // localStorage.setItem("admintoken",response.data.token);
+            // dispatch(control.settoken(true));
+            toast.error(response.data.result);
+            dispatch(control.settoken(false));
+            return ;
+            }
             toast.success(response.data.result);
+            const res=await axios.get(
+                url+"/api/admin/pr",
+                {withCredentials:true}
+            );
+            if(res.data.status){
+                dispatch(control.settoken(true));
             }
             else{
-                toast.error(response.data.result);
+                dispatch(control.settoken(false));
+                toast.error("AUTHENTICATION FAILED AFTER LOGIN");
+
             }
-            
-            
+         
         } catch (error) {
+            console.log(error);
         toast.error("SERVER ERROR");
+            dispatch(control.settoken(false));
             
         }
         

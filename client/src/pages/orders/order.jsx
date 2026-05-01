@@ -16,7 +16,7 @@ const[selectedorder,setselectedorder]=useState(null);
     }
     const newurl=url;
     try {
-      const response=await axios.post(`${newurl}/api/order/uorder`,{},{headers:{token}});
+      const response=await axios.post(`${newurl}/api/order/uorder`,{},{withCredentials:true});
       if(response.data.status){
 
       dispatch(manage.setorders(response.data.result));

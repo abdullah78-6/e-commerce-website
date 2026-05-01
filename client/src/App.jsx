@@ -12,9 +12,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Inner(){
   const loginstatus=useSelector(state=>state.main.login)
+  const url="http://localhost:8000";
   return <div>
     {/* <ToastContainer  autoClose={3000}/> */}
-  <Navbar/>
+  <Navbar url={url}/>
     {loginstatus?<Signin/>:<></>}
     <Outlet/>
     <Footer/>

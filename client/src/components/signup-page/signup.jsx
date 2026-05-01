@@ -28,13 +28,58 @@ function Onchangehandler(event){
  
 
 }
+// const onlogin=async(event)=>{
+//     event.preventDefault();
+//     let newurl=url;
+//     if(logintype==="signin"){
+//         // set login api url
+//         newurl=newurl+"/api/auth/signin"
+//         dispatch(control.setprofileicon(true));
+        
+      
+
+//     }
+//     else{
+//         // set signup api url
+//         newurl=newurl+"/api/auth/signup"
+//     }
+//     try{
+//         const response=await axios.post(newurl,logindatastructure);
+//     if(response.data.status){
+//           if(logintype==="signin"){
+//             // dispatch(control.settoken(response.data.token));
+//             localStorage.setItem("token",response.data.token);
+//             localStorage.setItem("email",response.data.email);
+//           }
+        
+//         dispatch(control.setbackendemail(response.data.email));
+        
+//         toast.success(response.data.result);
+        
+//     }
+//     else{
+//         toast.error(response.data.result);
+//     }
+
+//     }
+//     catch(err){
+//         toast.error("SERVER ERROR");
+
+//     }
+    
+
+// }
+
+
+
+
 const onlogin=async(event)=>{
     event.preventDefault();
     let newurl=url;
     if(logintype==="signin"){
         // set login api url
         newurl=newurl+"/api/auth/signin"
-        dispatch(control.setprofileicon(true));
+        // dispatch(control.setprofileicon(true));
         
       
 
@@ -44,15 +89,27 @@ const onlogin=async(event)=>{
         newurl=newurl+"/api/auth/signup"
     }
     try{
-        const response=await axios.post(newurl,logindatastructure);
+        const response=await axios.post(newurl,logindatastructure,{
+            withCredentials:true
+        });
     if(response.data.status){
           if(logintype==="signin"){
-            // dispatch(control.settoken(response.data.token));
-            localStorage.setItem("token",response.data.token);
-            localStorage.setItem("email",response.data.email);
+             const res=await axios.get(url+"/api/auth/pr",{
+            withCredentials:true,
+        })
+        if(res.data.status){
+            dispatch(control.setbackendemail(res.data.email));
+            dispatch(control.settoken(true));
+        }
+        else{
+            dispatch(control.setbackendemail(""));
+            dispatch(control.settoken(false));
+        }
+       
+       
           }
         
-        dispatch(control.setbackendemail(response.data.email));
+       
         
         toast.success(response.data.result);
         
@@ -69,6 +126,7 @@ const onlogin=async(event)=>{
     
 
 }
+
     return <div className="inset-0 fixed flex flex-col justify-center items-center bg-black/40 backdrop-blur-sm  ">
     
         <form className="flex flex-col gap-6 shadow-2xl w-[300px] md:w-[420px] xl:w-[420px] lg:w-[420px] bg-white rounded-3xl  p-7"onSubmit={onlogin} >

@@ -20,6 +20,8 @@ const additem=async(req,res)=>{
     // cloudinary
     const result=await cloudinary.uploader.upload(req.file.path,{
         folder:"uploads",
+        resource_type:"image",
+        timeout:120000
     })
     const fashionstore=new fashionmodel({
         name,

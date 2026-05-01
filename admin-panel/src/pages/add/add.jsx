@@ -31,7 +31,9 @@ function Add({url}){
         formdata.append("price",Number(data.price));
         formdata.append("category",data.category);
         formdata.append("image",image);
-        const response =await  axios.post(`${url}/api/store/add`,formdata);
+        const response =await  axios.post(`${url}/api/store/add`,formdata,{
+            withCredentials:true
+        });
         if(response.data.status){
             setimage(false);
             dispatch(control.setdata({name:"name",value:""}));

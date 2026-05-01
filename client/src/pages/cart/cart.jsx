@@ -35,18 +35,18 @@ function ShoopingCart(){
       }
 
     }
-  const loadcartdata=async(tok)=>{
-      const response=await axios.post(url+"/api/cart/get",{},{headers:{token:tok}});
+  const loadcartdata=async()=>{
+      const response=await axios.post(url+"/api/cart/get",{},{withCredentials:true});
       dispatch(manage.setcartitems(response.data.cartdata||{}));
     }
    
     useEffect(()=>{
       async function Loaddata(){
         await  fetchproductdata();
-        if(localStorage.getItem("token")){
-          const tok=localStorage.getItem("token");
-          if(tok){
-          await loadcartdata(tok);
+        if(token){
+          // const tok=localStorage.getItem("token");
+          if(token){
+          await loadcartdata();
           }
         }
 
@@ -62,16 +62,16 @@ function ShoopingCart(){
 
     const Addtocart=async(itemid)=>{
       dispatch(manage.setaddtocart(itemid));
-      if(localStorage.getItem("token")){
-        await axios.post(url+"/api/cart/inc",{itemid},{headers:{token}});
+      if(token){
+        await axios.post(url+"/api/cart/inc",{itemid},{withCredentials:true});
 
       }
 
     }
     const Removefromcart=async(itemid)=>{
       dispatch(manage.setremovefromcart(itemid))
-      if(localStorage.getItem("token")){
-        await axios.post(url+"/api/cart/dec",{itemid},{headers:{token}});
+      if(token){
+        await axios.post(url+"/api/cart/dec",{itemid},{withCredentials:true});
       }
 
     }

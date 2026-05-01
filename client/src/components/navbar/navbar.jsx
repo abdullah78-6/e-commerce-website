@@ -7,7 +7,8 @@ import { productlist } from "../../assests/index.js";
 import { useEffect } from "react";
 import {toast} from "react-toastify"
 import { IoLocationSharp } from "react-icons/io5";
-function Navbar(){
+import axios from "axios"
+function Navbar({url}){
     const dispatch=useDispatch();
     const finalnavclass=useSelector(state=>state.main.navclass);
     const token=useSelector(state=>state.main.token);
@@ -24,17 +25,40 @@ function Navbar(){
         dispatch(manage.settotalquantity());
 
     },[cartdetails])
-    useEffect(()=>{
-        const load=(e)=>{
+//     useEffect(()=>{
+//         const load=(e)=>{
            
             
-            const tok=localStorage.getItem("token");
-            const eml=localStorage.getItem("email");
-             dispatch(control.settoken(tok));
-            dispatch(control.setbackendemail(eml));
-                 }
-     load();
-},[token,backendemail]);
+//             const tok=localStorage.getItem("token");
+//             const eml=localStorage.getItem("email");
+//              dispatch(control.settoken(tok));
+//             dispatch(control.setbackendemail(eml));
+//                  }
+//      load();
+// },[token,backendemail]);
+useEffect(()=>{
+        const fetchuser=async()=>{
+            try {
+                const res=await axios.get(url+"/api/auth/pr",{
+                    withCredentials:true
+                })
+                if(res.data.status){
+                    dispatch(control.setbackendemail(res.data.email));
+                    dispatch(control.settoken(true));
+                }
+                else{
+                    dispatch(control.setbackendemail(""));
+                    dispatch(control.settoken(false));
+                }
+            } catch (error) {
+                dispatch(control.setbackendemail(""));
+                dispatch(control.settoken(false));
+                
+            }
+        };
+        fetchuser();
+
+    },[]);
     function change(classname){
         dispatch(control.setnavclass(classname));
         console.log(finalnavclass);
@@ -42,14 +66,27 @@ function Navbar(){
     function updateloginstatus(status){
         dispatch(control.setlogin(status));
     }
-    const logout=()=>{
+    const logout=async()=>{
         
-            localStorage.removeItem("token");
-            localStorage.removeItem("email");
+            // localStorage.removeItem("token");
+            // localStorage.removeItem("email");
+            // dispatch(control.setbackendemail(""));
+            // dispatch(control.setprofileicon(false));
+            // dispatch(control.settoken(""));
+            // toast.error("USER LOGOUT SUCCESSFULLY");
+            const response=await axios.post(url+"/api/auth/out",{},{
+            withCredentials:true
+        });
+        if(response.data.status){
             dispatch(control.setbackendemail(""));
-            dispatch(control.setprofileicon(false));
-            dispatch(control.settoken(""));
-            toast.error("USER LOGOUT SUCCESSFULLY");
+            dispatch(control.settoken(false));
+        toast.success(response.data.message);
+
+        }
+        else{
+            toast.error(response.data.message);
+        }
+
         
         
 

@@ -14,7 +14,7 @@ const adminslice=createSlice({
         email:"",
         password:"",
     },
-    token:"",
+    token:false,
    backenddata:[],
     orders:[],
     list:[

@@ -13,8 +13,8 @@ function App() {
     const url="http://localhost:8000"
     return <div>
         {/* <ToastContainer/> */}
-        <Navbar/>
-        {login?<Login/>:<></>}
+        <Navbar url={url}/>
+        {login?<Login url={url}/>:<></>}
         <hr/>
         <div className="flex">
         <Sidebar/>

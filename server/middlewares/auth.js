@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 const authmiddleware=async(req,res,next)=>{
-    const {token}=req.headers;
+    // const {token}=req.headers;
+    const token=req.cookies.token;
     if(!token){
         return res.json({status:false,result:"NOT AUTHORIZED LOGIN AGAIN "});
     }

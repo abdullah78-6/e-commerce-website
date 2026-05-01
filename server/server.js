@@ -7,9 +7,18 @@ import authrouter from "./routes/userroutes.js";
 import cartrouter from "./routes/cartroutes.js";
 import orderrouter from "./routes/order-routes.js";
 import adminrouter from "./routes/adminroutes.js";
+import cookieParser from "cookie-parser";
 const app=express();
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+// use localhost for local server 
+app.use(cors({
+    origin:[
+        "https://e-commerce-website-frontend-yeyn.onrender.com",
+        "https://e-commerce-website-admin-owner.onrender.com"
+    ],
+    credentials:true
+}));
 app.use("/api/store",fashionrouter);
 app.use("/api/auth",authrouter);
 app.use("/api/cart",cartrouter);

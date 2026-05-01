@@ -6,9 +6,7 @@ import { manage } from "../../store/products-slice";
 import axios from "axios"
 function Footer() {
   const dispatch=useDispatch();
-
-// const apikey="47fac61afc4b40cfa793600b7b9ce5bb";
-const apikey="eb63b27e49f54a35b4940fec9ee05cb2";
+const apikey=import.meta.env.VITE_GEOAPIFY_API_KEY;
  useEffect(()=>{
   if(!navigator.geolocation){
     dispatch(manage.setcityname(" TURN ON YOUR GPS "));
