@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Inner(){
   const loginstatus=useSelector(state=>state.main.login)
-  const url="http://localhost:8000";
+  const url="https://e-commerce-website-main-server.onrender.com";
   return <div>
     {/* <ToastContainer  autoClose={3000}/> */}
   <Navbar url={url}/>
